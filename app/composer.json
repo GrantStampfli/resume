@@ -1,0 +1,32 @@
+{
+    "name": "grantstampfli/resume",
+    "description": "Resume (Markdown Resume Generator)",
+    "homepage": "https://github.com/grantstampfli/resume",
+    "keywords": [
+        "markdown",
+        "resume",
+        "html5"
+    ],
+    "license": "MIT",
+    "version": "2.0.10",
+    "minimum-stability": "dev",
+    "require": {
+        "fabpot/php-cs-fixer": "0.4.0",
+        "indeyets/pake": "~1.99",
+        "kriswallsmith/assetic": "1.1.2",
+        "leafo/lessphp": "v0.4.0",
+        "michelf/php-markdown": "1.4.0",
+        "michelf/php-smartypants": "1.6.0-beta1",
+        "mustache/mustache": "2.5.1",
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "1.*",
+        "sunra/php-simple-html-dom-parser": "v1.5.0",
+        "symfony/config": "v2.3.4",
+        "symfony/console": "v2.3.4",
+        "symfony/yaml": "v2.3.4",
+        "twig/twig": "v1.13.2"
+    },
+    "bin": [
+        "bin/resume"
+    ]
+}
