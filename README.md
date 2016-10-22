@@ -1,4 +1,4 @@
-# Resume Generator
+# Resume/CV Generator
 
 - PDF generation via [wkhtmltopdf](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF)
 - Responsive design for multiple device viewport sizes
@@ -65,26 +65,6 @@ cd/app/
 cd/app/
 ./bin/resume html --template unstyled ../resume.md ../
 ./bin/resume pdf --template unstyled ../resume.md ../
-```
-
-
-###_Optional tweaks to add to:_  [index.html](http://grantstampfli.github.io/resume/index.html "This makes it so when the browser loads the site, the page will open the desired file type.")
-
-```
-<head>
-	<script type="text/javascript">
-		// option: to load with HTML Version: comment out the return
-		
-    	function loadHTML(){
-        	window.location.href = ("resume.html");
-			function loadPDF(){
-        	window.location.href = ("resume.pdf");
-    		};
-    	return loadPDF();
-    	};
-    </script>
-</head>
-<body onload="loadHTML()">
 ```
 
 > ####ACKNOWLEDGMENTS:
