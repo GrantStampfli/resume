@@ -34,7 +34,7 @@ Available commands:
 **modern, swissen, blockish, readable, and unstyled**.
 
 > ##Output Options:
-To generate the **resume.md** to a html and or pdf format follow the steps below. Each of the examples below is a different [template]("modern, swissen, blockish, readable, and unstyled") output. 
+To generate the **resume.md** to a html and or pdf format follow the steps below. Each of the examples below is a different **template** output. 
 
 1. 
 ```
