@@ -16,13 +16,13 @@ Conscientious, innovative and driven professional with a mission to not be an â€
 ### Skills {#skills}
 
 * Web Development
-  : Experienced with creating robust SPA web applications (VueJS and EmberJS). Front- end web development with semantic HTML5, CSS3, and modern JavaScript.
+  : Experienced with creating robust progressive web applications. Front end web development with semantic HTML5, CSS3, JavaScript with a focus on cross-browser accessibility.
 
 * System Admin
   : Skillful with Linux based servers (Debian and Ubuntu). Knowledgable in the configuration and tweaking of Apache, Nginx, MySQL, and PostgreSQL.  
 
 * UI Design
-  : Wire framing, high fidelity photo editing in Photoshop and site planning. Translating design comps and wireframes into mobile first progressive web applications.
+  : Wire framing, high fidelity photo editing in Photoshop and site planning. Translating design comps and wireframes into mobile first single web page web applications.
 
 -------
 
@@ -43,7 +43,7 @@ Conscientious, innovative and driven professional with a mission to not be an â€
 ### Experience {#experience}
 
 Expeditors
-: *Senior Software Engineer*
+: *Senior Full Stack Engineer*
   __May 2020-Present__
   The Koho project: Koho is a digital 3PL, offering LTL instant rates, booking and shipment management. Ruby on Rails and Vue.js full stack development. A few responsibilities include working closely with designer/PM/stakeholders to make a rich user experience and a user interface that is industry leading and stands in the market. Built a vue component library and a modern single page application. Test driven development approach to stream line the deployment proccess and limit UI bugs reaching production.
 
@@ -52,7 +52,7 @@ Fleet Logistics
   __January 2018-May 2020__
   Digital Freight Forwarding Startup: Fleet is a digital freight forwarder that offers end-to-end international freight shipping services, from instant rates and booking to freight management and delivery. Rails and Vue.js application development in a code review-driven agile workflow. A few responsibilities include working closely with designer/PM/stakeholders to create UX and UI rich functionalities, building components and views with TDD (Jest), and limited devops.
 
-Platt Eletric
+Platt Electric Supply
 : *Front End Developer & Team Lead*
   __October 2015-January 2018__
   Platt.com is a full featured E-commerce website with additional tools for the electrical industry.Front end development of several ASP.NET MVC websites for both internal and external use. Promoted to a team lead. Mentored developers in javascript and other front end development methodologies. Involved in projects ranging from complete .net merchandise systems, to help desk/chat tools.
@@ -76,6 +76,6 @@ Web-Developer
 
 ### Footer {#footer}
 
-Grant Stampfli -- *Email:* __*[mail@gstampfli.com](mailto:mail@gstampfli.com)*__ -- *LinkedIn:* __*[/grantstampfli](https://www.linkedin.com/in/grantstampfli)*__ -- *Github:* __*[/grantstampfli](https://www.github.com/grantstampfli)*__
+*Phone:* __*[(503) 446-5997](tel:+15034465997)*__ -- *Email:* __*[mail@gstampfli.com](mailto:mail@gstampfli.com)*__ -- *LinkedIn:* __*[@grantstampfli](https://www.linkedin.com/in/grantstampfli)*__ -- *Github:* __*[@grantstampfli](https://www.github.com/grantstampfli)*__
 
 ------
