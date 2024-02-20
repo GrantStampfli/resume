@@ -1,5 +1,5 @@
 # Grant Stampfli
-## Senior Full Stack Engineer
+## Software Engineer
 
 > [Download PDF](resume.pdf)  
 > __[(503) 446-5997](tel:+15034465997)__  
@@ -18,11 +18,11 @@ Conscientious, innovative and driven professional with a mission to not be an â€
 * Web Development
   : Experienced with creating robust SPA web applications (VueJS and EmberJS). Front- end web development with semantic HTML5, CSS3, and modern JavaScript.
 
-* System Administration
+* System Admin
   : Skillful with Linux based servers (Debian and Ubuntu). Knowledgable in the configuration and tweaking of Apache, Nginx, MySQL, and PostgreSQL.  
 
 * UI Design
-  : Photoshop wire framing and site planning. Translating design comps and wireframes into mobile first progressive web applications. Focused on creating accessible cross-browser design patterns compatible on all devices.  
+  : Wire framing, high fidelity photo editing in Photoshop and site planning. Translating design comps and wireframes into mobile first progressive web applications.
 
 -------
 
@@ -43,7 +43,7 @@ Conscientious, innovative and driven professional with a mission to not be an â€
 ### Experience {#experience}
 
 Expeditors
-: *Senior Full Stack Engineer*
+: *Senior Software Engineer*
   __May 2020-Present__
   The Koho project: Koho is a digital 3PL, offering LTL instant rates, booking and shipment management. Ruby on Rails and Vue.js full stack development. A few responsibilities include working closely with designer/PM/stakeholders to make a rich user experience and a user interface that is industry leading and stands in the market. Built a vue component library and a modern single page application. Test driven development approach to stream line the deployment proccess and limit UI bugs reaching production.
 
