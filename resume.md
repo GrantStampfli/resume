@@ -55,7 +55,12 @@ Fleet Logistics
 Platt Eletric
 : *Front End Developer & Team Lead*
   __October 2015-January 2018__
-  Front end development of several ASP.NET MVC websites for both internal and external use. Promoted to a team lead to help coach and mentor developers in javascript and other front end development methodologies. Our team was involved in different projects ranging from complete .net merchandise systems, to help desk/chat tools. My role was to continue development on our main set of tools which consists of a full desktop and responsive tablet/mobile site, admin reporting tools, and a product inventory/management application. Platt.com is a full featured E-commerce website with tools for the electrical industry. We also had mobile apps for iPhone and Android.
+  Platt.com is a full featured E-commerce website with additional tools for the electrical industry.Front end development of several ASP.NET MVC websites for both internal and external use. Promoted to a team lead. Mentored developers in javascript and other front end development methodologies. Involved in projects ranging from complete .net merchandise systems, to help desk/chat tools.
+
+Prosper IT Consulting
+: *Web Developer*
+  __August 2015-September 2015__
+  Front end development of an ASP.NET MVC learning portal for proprietary technical software development course. App was fully hosted in the Azure cloud, and used ASP.NET Identity, OAuth, and SQL Server.
 
 Now Nerd
 : *Front End Developer*
