@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+vendor/
+
+# build output
+.output/
+.nuxt/
+.nitro/
+.cache/
+.data/
+dist/
+.turbo/
+.vercel/
+
+# tooling caches
+.eslintcache
+*.tsbuildinfo
+.phpunit.cache/
+.php-cs-fixer.cache
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

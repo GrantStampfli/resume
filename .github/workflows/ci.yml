@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TURBO_TELEMETRY_DISABLED: 1
+  NUXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  node:
+    name: Lint, typecheck, build (Nuxt apps)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm lint
+
+      - run: pnpm turbo run typecheck test build --filter=@stampfli/portfolio --filter=@stampfli/admin
+
+  php:
+    name: Test and build (resume-gen)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/resume-gen
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, libxml
+          tools: composer:v2
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Composer install
+        run: composer install --no-interaction --no-progress --prefer-dist --working-dir=app
+
+      - name: Lint (php-cs-fixer)
+        run: composer lint --working-dir=app
+
+      - name: Test (PHPUnit)
+        run: composer test --working-dir=app
+
+      - name: Build HTML + PDF
+        env:
+          RESUME_CHROMIUM_PATH: /usr/bin/google-chrome
+        run: node scripts/build.mjs
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resume-dist
+          path: apps/resume-gen/dist
