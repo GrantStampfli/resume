@@ -1,18 +1,29 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { databaseSource, usingDatabase } from './content-sources'
 
 const link = z.object({
   href: z.string(),
   label: z.string(),
 })
 
+/**
+ * Content comes from the database when one is configured (the admin writes those rows) and
+ * from the files in this directory otherwise. `prefix` is only meaningful for file sources;
+ * a database key already carries its directory, e.g. `articles/hello.md` → `/articles/hello`.
+ */
+function source(include: string, prefix?: string) {
+  if (usingDatabase)
+    return databaseSource(include)
+
+  return prefix ? { include, prefix } : { include }
+}
+
 export default defineContentConfig({
   collections: {
     /** Home (`index.md`) and About (`about.md`). */
     pages: defineCollection({
       type: 'page',
-      source: {
-        include: '*.md',
-      },
+      source: source('*.md'),
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),
@@ -27,10 +38,7 @@ export default defineContentConfig({
     /** Long-form writing (`articles/*.md`). */
     articles: defineCollection({
       type: 'page',
-      source: {
-        include: 'articles/*.md',
-        prefix: '/articles',
-      },
+      source: source('articles/*.md', '/articles'),
       schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -43,10 +51,7 @@ export default defineContentConfig({
     /** Projects grid (`projects/*.md`); the body renders on the project page. */
     projects: defineCollection({
       type: 'page',
-      source: {
-        include: 'projects/*.md',
-        prefix: '/projects',
-      },
+      source: source('projects/*.md', '/projects'),
       schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -66,7 +71,7 @@ export default defineContentConfig({
     /** Work history for the home page "Work" card (`experience.yml`). */
     experience: defineCollection({
       type: 'data',
-      source: 'experience.yml',
+      source: source('experience.yml'),
       schema: z.object({
         title: z.string(),
         subtitle: z.string().optional(),
@@ -88,7 +93,7 @@ export default defineContentConfig({
     /** Talks and podcasts (`speaking.yml`). */
     speaking: defineCollection({
       type: 'data',
-      source: 'speaking.yml',
+      source: source('speaking.yml'),
       schema: z.object({
         title: z.string(),
         intro: z.string(),
@@ -108,7 +113,7 @@ export default defineContentConfig({
     /** Tools and gear (`uses.yml`). */
     uses: defineCollection({
       type: 'data',
-      source: 'uses.yml',
+      source: source('uses.yml'),
       schema: z.object({
         title: z.string(),
         intro: z.string(),
@@ -126,7 +131,7 @@ export default defineContentConfig({
     /** Copy for the projects page header and the project links (`projects.yml`). */
     projectsPage: defineCollection({
       type: 'data',
-      source: 'projects.yml',
+      source: source('projects.yml'),
       schema: z.object({
         title: z.string(),
         intro: z.string(),

@@ -1,8 +1,23 @@
-/** Paths of the files the admin manages, relative to the monorepo root. */
+/**
+ * Content is keyed by its path relative to the repository root, so the resume markdown and
+ * every portfolio content file live in one table.
+ */
+
 export const RESUME_PATH = 'apps/resume-gen/resume.md'
 export const PORTFOLIO_CONTENT_DIR = 'apps/portfolio/content'
 
 export const EDITABLE_EXTENSIONS = ['.md', '.yml', '.yaml', '.json'] as const
+
+/** `articles/hello.md` → `apps/portfolio/content/articles/hello.md` */
+export function portfolioContentPath(relativePath: string): string {
+  return `${PORTFOLIO_CONTENT_DIR}/${relativePath}`
+}
+
+/** `apps/portfolio/content/articles/hello.md` → `articles/hello.md`, or null when outside the directory. */
+export function portfolioContentKey(path: string): string | null {
+  const prefix = `${PORTFOLIO_CONTENT_DIR}/`
+  return path.startsWith(prefix) ? path.slice(prefix.length) : null
+}
 
 /**
  * Normalises a caller supplied path and rejects anything that escapes its directory or is not
@@ -40,13 +55,4 @@ export function normalizeContentPath(input: string): string {
     throw new Error(`Only ${EDITABLE_EXTENSIONS.join(', ')} files can be edited`)
 
   return cleaned
-}
-
-export function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/\p{M}/gu, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
 }

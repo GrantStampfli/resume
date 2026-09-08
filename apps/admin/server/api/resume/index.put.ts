@@ -11,12 +11,12 @@ const schema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  await requireAdmin(event)
+  const user = await requireAdmin(event)
 
   const { raw } = await readValidatedBody(event, schema.parse)
   const { store, driver } = useContentStore(event)
 
-  await store.write(RESUME_PATH, raw.endsWith('\n') ? raw : `${raw}\n`, 'chore(resume): update resume.md via admin')
+  await store.write(RESUME_PATH, raw.endsWith('\n') ? raw : `${raw}\n`, 'chore(resume): update resume.md via admin', user.name)
   triggerDeploy('resume')
 
   return { ok: true, driver }

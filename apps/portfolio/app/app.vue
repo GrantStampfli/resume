@@ -17,10 +17,12 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="flex w-full">
-    <NuxtLoadingIndicator color="#14b8a6" />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <UApp>
+    <div class="flex w-full">
+      <NuxtLoadingIndicator color="#14b8a6" />
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
+  </UApp>
 </template>

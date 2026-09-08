@@ -8,6 +8,10 @@ pnpm + Turborepo monorepo for my resume generator, portfolio site and the admin 
 | [`apps/portfolio`](apps/portfolio)   | Nuxt 4, Nuxt UI, Nuxt Content               | Vercel                       |
 | [`apps/admin`](apps/admin)           | Nuxt 4, Nuxt UI, nuxt-auth-utils            | Vercel                       |
 
+| Package                                      | What it is                                                          |
+| -------------------------------------------- | ------------------------------------------------------------------- |
+| [`packages/content-db`](packages/content-db) | Database-backed content store shared by the admin and the portfolio |
+
 ## Getting started
 
 ```bash
@@ -32,6 +36,16 @@ PDF.
 | `pnpm test`      | PHPUnit (resume-gen) and Vitest (Nuxt apps)         |
 
 Dependency versions are pinned once in the `catalog:` section of `pnpm-workspace.yaml`.
+
+## Content storage
+
+Content lives in the repository as markdown and YAML (`apps/resume-gen/resume.md`,
+`apps/portfolio/content/**`) and the admin edits those files through the `fs` or `github` driver.
+
+Set `CONTENT_DATABASE_URL` (or `DATABASE_URL` / `POSTGRES_URL`) in both Nuxt apps and content moves to a
+database instead: the admin writes rows — with revision history and restore — and the portfolio builds
+from the same rows. Postgres in production, a SQLite file locally. See
+[`packages/content-db`](packages/content-db).
 
 ## CI / deploys
 

@@ -27,14 +27,34 @@ pnpm portfolio typecheck
 Everything under `content/` can be edited from the admin app (`apps/admin`). Site name, socials and the
 navigation live in `app/app.config.ts`.
 
+## Content source
+
+By default the collections read the markdown and YAML in `content/`. Set `CONTENT_DATABASE_URL` (or
+`DATABASE_URL` / `POSTGRES_URL`) and they read the rows the admin writes instead, through a
+[custom collection source](https://content.nuxt.com/docs/collections/sources) in `content-sources.ts`:
+
+```bash
+CONTENT_DATABASE_URL=postgres://user:password@host:5432/database
+CONTENT_DATABASE_URL=file:.data/content.db   # local
+```
+
+Pages and `queryCollection` are identical either way — the two modes produce the same routes. Content is
+read at build time, so publishing an edit means a rebuild; the admin's deploy hook does that. An empty
+database is seeded once from the files in this checkout, so a fresh deployment renders the committed
+content rather than nothing.
+
+Newsletter sign-ups (`server/api/subscribe.post.ts`) go to `newsletter_subscribers` when a database is
+configured, and are only logged when one is not.
+
 ## Template port notes
 
-- Tailwind CSS v4 through `@tailwindcss/vite`; the Spotlight prose theme is in `typography.ts` and loaded
-  with `@config` from `app/assets/css/main.css`.
+- Nuxt UI v4 provides the app shell (`UApp`), toasts, icons and the mobile navigation modal; it registers
+  the Tailwind CSS v4 Vite plugin itself. The Spotlight prose theme is in `typography.ts` and loaded with
+  `@config` from `app/assets/css/main.css`, and the Nuxt UI palette is set in `app/app.config.ts`.
 - Dark mode: `@nuxtjs/color-mode` toggles the `dark` class on `<html>`; `ThemeToggle.vue` mirrors the
   template's sun/moon button.
 - The header's shrinking-avatar scroll effect is `app/composables/useHeaderScroll.ts`.
-- Mobile navigation uses `@headlessui/vue` (Popover) like the original uses Headless UI for React.
+- Mobile navigation is `MobileNavigation.vue`, a `UModal` restyled into the template's top panel.
 - Icons are the template's inline SVGs as components under `app/components/icons/`.
 - Images (`public/images`): avatar/portrait and the five photos on the home page.
 

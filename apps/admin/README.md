@@ -15,13 +15,35 @@ pnpm admin dev                               # http://localhost:3001
 
 ## Storage drivers
 
-| Driver   | When                         | What a save does                                                                                                                            |
-| -------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fs`     | default in development       | Writes the file in this checkout; you commit it like any edit                                                                               |
-| `github` | default in production/Vercel | Commits through the GitHub Contents API on the configured branch, which triggers the resume deploy workflow and the Vercel portfolio deploy |
+| Driver   | When                                | What a save does                                                                                                                            |
+| -------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `db`     | whenever `CONTENT_DATABASE_URL` set | Writes a row in `content_entries` and keeps the previous body in `content_revisions`                                                        |
+| `fs`     | default in development              | Writes the file in this checkout; you commit it like any edit                                                                               |
+| `github` | default in production/Vercel        | Commits through the GitHub Contents API on the configured branch, which triggers the resume deploy workflow and the Vercel portfolio deploy |
 
 Force one with `NUXT_STORAGE_DRIVER`. The `github` driver needs `NUXT_GITHUB_TOKEN` (fine-grained token
 with Contents read/write on the repo), `NUXT_GITHUB_REPO` and `NUXT_GITHUB_BRANCH`.
+
+## Content database
+
+Set `CONTENT_DATABASE_URL` (or `DATABASE_URL` / `POSTGRES_URL`, so a Vercel Postgres store works with no
+extra configuration) and the admin switches to the `db` driver from
+[`@stampfli/content-db`](../../packages/content-db). Postgres and SQLite are both supported:
+
+```bash
+CONTENT_DATABASE_URL=postgres://user:password@host:5432/database
+CONTENT_DATABASE_URL=file:.data/content.db   # local
+```
+
+Rows are keyed by repository-relative path (`apps/resume-gen/resume.md`,
+`apps/portfolio/content/articles/hello.md`), so the same table backs the resume and the portfolio.
+
+- **Import files** on the dashboard copies the checked-in files into the database. It skips paths that
+  already have a row unless you tick _overwrite_, so an import never clobbers an edit.
+- **History** on the resume and content editors lists revisions and restores one. Deletes keep a revision
+  too, so a removed page can be brought back.
+- Publishing is unchanged: a save updates the database, and the deploy hook rebuilds the portfolio, which
+  reads the same rows at build time.
 
 ## Auth
 

@@ -1,4 +1,11 @@
 export default defineAppConfig({
+  // Nuxt UI components pick up the Spotlight palette: teal accents on zinc.
+  ui: {
+    colors: {
+      primary: 'teal',
+      neutral: 'zinc',
+    },
+  },
   site: {
     name: 'Grant Stampfli',
     tagline: 'Senior full stack engineer building Vue and Rails products',

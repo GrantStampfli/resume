@@ -14,12 +14,12 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@headlessui/vue": "catalog:",
     "@nuxt/content": "catalog:",
     "@nuxt/image": "catalog:",
+    "@nuxt/ui": "catalog:",
     "@nuxtjs/color-mode": "catalog:",
+    "@stampfli/content-db": "workspace:*",
     "@tailwindcss/typography": "catalog:",
-    "@tailwindcss/vite": "catalog:",
     "@takumi-rs/core": "catalog:",
     "@vercel/analytics": "catalog:",
     "@vercel/edge-config": "catalog:",

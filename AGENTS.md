@@ -12,6 +12,10 @@ preferences) and the framework skills alongside it; they were installed with
 | `apps/portfolio`  | Nuxt 4 + Nuxt UI + Nuxt Content portfolio site (deployed to Vercel)         |
 | `apps/admin`      | Nuxt 4 + Nuxt UI admin that edits the resume markdown and portfolio content |
 
+| Package               | What it is                                                             |
+| --------------------- | ---------------------------------------------------------------------- |
+| `packages/content-db` | db0-backed content store (Postgres or SQLite) shared by both Nuxt apps |
+
 ## Commands
 
 ```bash
@@ -31,3 +35,8 @@ pnpm <app> <script>   # e.g. pnpm portfolio dev, pnpm resume-gen build
 - Nuxt apps use `app/` as `srcDir` (Nuxt 4 layout). Server code lives in `server/`.
 - The resume content is `apps/resume-gen/resume.md` and uses PHP Markdown Extra syntax
   (definition lists, `{#id}` header attributes). Do not "fix" that syntax.
+- Content is files by default. With `CONTENT_DATABASE_URL` set, the admin writes database rows and the
+  portfolio's collections read them (`apps/portfolio/content-sources.ts`) — both modes must keep working,
+  and both must produce the same routes.
+- Database keys are repository-relative paths. Validate any caller-supplied path with
+  `normalizeContentPath` before it reaches the store.
