@@ -1,0 +1,50 @@
+{
+  "name": "stampfli",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "description": "Grant Stampfli's resume generator, portfolio site and admin CMS",
+  "author": "Grant Stampfli <mail@gstampfli.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GrantStampfli/resume.git"
+  },
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "generate": "turbo run generate",
+    "preview": "turbo run preview",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --cache --fix",
+    "resume-gen": "pnpm --filter @stampfli/resume-gen",
+    "portfolio": "pnpm --filter @stampfli/portfolio",
+    "admin": "pnpm --filter @stampfli/admin",
+    "skills:update": "pnpm dlx skills update -y",
+    "prepare": "simple-git-hooks"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-format": "catalog:",
+    "lint-staged": "catalog:",
+    "simple-git-hooks": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "vercel": "catalog:"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}

@@ -1,0 +1,55 @@
+minimumReleaseAgeExcludePrune: true
+trustPolicy: no-downgrade
+shellEmulator: true
+
+packages:
+  - apps/*
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@tailwindcss/oxide'
+  - better-sqlite3
+  - esbuild
+  - sharp
+  - simple-git-hooks
+  - unrs-resolver
+  - vue-demi
+
+# Single source of truth for dependency versions; packages reference them with "catalog:".
+catalog:
+  '@antfu/eslint-config': ^9.5.1
+  '@iconify-json/lucide': ^1.2.130
+  '@iconify-json/simple-icons': ^1.2.95
+  '@nuxt/content': ^3.16.0
+  '@nuxt/image': ^2.1.0
+  '@nuxt/test-utils': ^4.3.2
+  '@nuxt/ui': ^4.11.1
+  '@takumi-rs/core': ^2.13.7
+  '@types/markdown-it': ^14.2.0
+  '@types/markdown-it-attrs': ^4.1.3
+  '@types/node': ^26.5.0
+  '@vercel/analytics': ^2.0.1
+  '@vercel/blob': ^2.8.0
+  '@vercel/edge-config': ^1.5.1
+  '@vercel/functions': ^3.9.5
+  '@vercel/speed-insights': ^2.0.0
+  '@vueuse/core': ^14.4.0
+  eslint: ^10.10.0
+  eslint-plugin-format: ^1.0.2
+  flags: ^4.3.0
+  gray-matter: ^4.0.3
+  lint-staged: ^17.5.0
+  markdown-it: ^15.0.1
+  markdown-it-attrs: ^5.0.1
+  markdown-it-deflist: ^4.0.0
+  nuxt: ^4.5.2
+  nuxt-auth-utils: ^0.5.30
+  nuxt-og-image: ^6.7.8
+  simple-git-hooks: ^2.14.0
+  turbo: ^2.10.12
+  typescript: ^5.9.3
+  vercel: ^59.11.7
+  vitest: ^5.0.0
+  vue: ^3.5.42
+  vue-tsc: ^3.3.11
+  zod: ^4.5.4

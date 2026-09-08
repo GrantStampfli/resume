@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "globalDependencies": ["pnpm-workspace.yaml", "tsconfig.base.json"],
+  "globalEnv": ["NODE_ENV", "CI", "VERCEL", "VERCEL_ENV", "VERCEL_URL", "NITRO_PRESET"],
+  "globalPassThroughEnv": ["COMPOSER_*", "CHROME_PATH", "PUPPETEER_EXECUTABLE_PATH", "NUXT_TELEMETRY_DISABLED"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "NUXT_*",
+        "BLOB_READ_WRITE_TOKEN",
+        "EDGE_CONFIG",
+        "FLAGS_SECRET",
+        "RESUME_*",
+        "GITHUB_*"
+      ],
+      "outputs": [".output/**", ".nuxt/**", "dist/**", "!.nuxt/cache/**"]
+    },
+    "generate": {
+      "dependsOn": ["^build"],
+      "env": ["NUXT_*", "EDGE_CONFIG", "FLAGS_SECRET"],
+      "outputs": [".output/**", "dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "interactive": true
+    },
+    "preview": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "env": ["RESUME_*"],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    }
+  }
+}

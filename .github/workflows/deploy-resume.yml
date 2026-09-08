@@ -1,0 +1,59 @@
+name: Deploy resume (GitHub Pages)
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - apps/resume-gen/**
+      - .github/workflows/deploy-resume.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/resume-gen
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, libxml
+          tools: composer:v2
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - run: composer install --no-interaction --no-progress --prefer-dist --no-dev --working-dir=app
+
+      - name: Build HTML + PDF
+        env:
+          RESUME_CHROMIUM_PATH: /usr/bin/google-chrome
+        run: node scripts/build.mjs
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/resume-gen/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

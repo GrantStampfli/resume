@@ -1,74 +1,47 @@
-# Resume/CV Generator
+# stampfli
 
-- PDF generation via [wkhtmltopdf](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF)
-- Responsive design for multiple device viewport sizes
-- Simple Markdown formatting
-- Single file deployment (no external stylesheets)
+pnpm + Turborepo monorepo for my resume generator, portfolio site and the admin that manages both.
 
+| App                                  | Stack                                       | Deploys to                   |
+| ------------------------------------ | ------------------------------------------- | ---------------------------- |
+| [`apps/resume-gen`](apps/resume-gen) | PHP 8 CLI (Symfony Console, Twig, Chromium) | GitHub Pages → gstampfli.com |
+| [`apps/portfolio`](apps/portfolio)   | Nuxt 4, Nuxt UI, Nuxt Content               | Vercel                       |
+| [`apps/admin`](apps/admin)           | Nuxt 4, Nuxt UI, nuxt-auth-utils            | Vercel                       |
 
-## **Options and Help:**
-```
-Usage:
-  [options] command [arguments]
+## Getting started
 
-Options:
-  --help           -h Display this help message.
-  --quiet          -q Do not output any message.
-  --verbose        -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-  --version        -V Display this application version.
-  --ansi              Force ANSI output.
-  --no-ansi           Disable ANSI output.
-  --no-interaction -n Do not ask any interactive question.
-
-Available commands:
-  help         Displays help for a command
-  html         Generate an HTML resume from a markdown file
-  list         Lists commands
-  pdf          Generate a PDF from a markdown file
-  selfupdate   Updates resume.phar to the latest version.
-  stats        Generate a word frequency analysis of your resume
-  templates    List available templates
-  version      Show current version information
-```
-> ###_**Templates to choose from:**_
-**modern, swissen, blockish, readable, and unstyled**.
-
-> ##Output Options:
-To generate the **resume.md** to a html and or pdf format follow the steps below. Each of the examples below is a different **template** output. 
-
-1. 
-```
-cd/app/
-./bin/resume html --template modern ../resume.md ../
-./bin/resume pdf --template modern ../resume.md ../
-```
-2.
-```
-cd/app/
-./bin/resume html --template swissen ../resume.md ../
-./bin/resume pdf --template swissen ../resume.md ../
-```
-3.
-```
-cd/app/
-./bin/resume html --template blockish ../resume.md ../
-./bin/resume pdf --template blockish ../resume.md ../
-```
-4.
-```
-cd/app/
-./bin/resume html --template readable ../resume.md ../
-./bin/resume pdf --template readable ../resume.md ../
-```
-5.
-```
-cd/app/
-./bin/resume html --template unstyled ../resume.md ../
-./bin/resume pdf --template unstyled ../resume.md ../
+```bash
+corepack enable            # or: npm i -g pnpm@10
+pnpm install               # installs every app; Nuxt apps run `nuxt prepare` on postinstall
+pnpm dev                   # turbo run dev — portfolio :3000, admin :3001, resume-gen watch
 ```
 
-> ####ACKNOWLEDGMENTS:
-* The main template style for this app was borrowed from the **[Sample Resume Template](http://sampleresumetemplate.net/ "A great starting point")**.
-* The Markdown conversion tool was created by: **[Craig Davis](https://github.com/there4 "Author of the Markdown Generator")**
-* The command line tool for PDF generations ([wkhtmltopdf](https://github.com/pdfkit/pdfkit/wiki/Installing-WKHTMLTOPDF ".md to .pdf")) was created by: **[Ashish Kulkarni](https://github.com/ashkulz "Author of the WKHTMLTOPDF commandline tool.")**
-___
+Per app: `pnpm portfolio dev`, `pnpm admin dev`, `pnpm resume-gen build`.
+
+`apps/resume-gen` also needs PHP 8.2+ and Composer (`pnpm resume-gen install:php`), plus Chromium for the
+PDF.
+
+## Scripts
+
+| Command          | What it runs                                        |
+| ---------------- | --------------------------------------------------- |
+| `pnpm build`     | `turbo run build` for every app                     |
+| `pnpm lint`      | ESLint (`@antfu/eslint-config`) over the whole repo |
+| `pnpm lint:fix`  | Same, with autofix (also runs on pre-commit)        |
+| `pnpm typecheck` | `nuxt typecheck` in the Nuxt apps                   |
+| `pnpm test`      | PHPUnit (resume-gen) and Vitest (Nuxt apps)         |
+
+Dependency versions are pinned once in the `catalog:` section of `pnpm-workspace.yaml`.
+
+## CI / deploys
+
+- `.github/workflows/ci.yml` — lint, typecheck, test and build on every push/PR.
+- `.github/workflows/deploy-resume.yml` — builds `apps/resume-gen` and publishes `dist/` to GitHub Pages
+  whenever `resume.md` or the generator changes on `master`.
+- The Nuxt apps are Vercel projects with their root directory set to `apps/portfolio` and `apps/admin`;
+  each has a `vercel.json` that builds through `turbo` and skips unaffected deploys with `turbo-ignore`.
+
+## Agent skills
+
+`.claude/skills` holds [Anthony Fu's skills](https://github.com/antfu/skills) (Nuxt, Vue, Vite, Vitest,
+pnpm, Turborepo, ESLint conventions…). Refresh them with `pnpm skills:update`. See [AGENTS.md](AGENTS.md).

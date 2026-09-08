@@ -1,0 +1,80 @@
+title: Experience
+subtitle: Where I have worked and what I studied
+items:
+  - organisation: Expeditors
+    role: Senior Full Stack Engineer
+    start: '2020-05'
+    end: Present
+    url: https://www.expeditors.com
+    summary: >-
+      The Koho project: a digital 3PL offering LTL instant rates, booking and shipment management.
+      Ruby on Rails and Vue.js full stack development.
+    highlights:
+      - Built the Vue component library and a modern single page application
+      - Worked directly with design, product and stakeholders on an industry-leading UI
+      - Test-driven development to streamline deployments and keep UI bugs out of production
+
+  - organisation: Fleet Logistics
+    role: Senior Front End Engineer
+    start: '2018-01'
+    end: '2020-05'
+    summary: >-
+      Digital freight forwarder offering end-to-end international shipping, from instant rates and
+      booking to freight management and delivery. Rails and Vue.js development in a code-review-driven
+      agile workflow.
+    highlights:
+      - Built components and views with TDD (Jest)
+      - Partnered with designer, PM and stakeholders on UX-rich features
+      - Limited devops for the front-end build and deploys
+
+  - organisation: Platt Electric Supply
+    role: Front End Developer & Team Lead
+    start: '2015-10'
+    end: '2018-01'
+    summary: >-
+      Platt.com is a full-featured e-commerce site with tools for the electrical industry. Front-end
+      development of several ASP.NET MVC sites for internal and external use.
+    highlights:
+      - Promoted to team lead; mentored developers in JavaScript and front-end methodology
+      - Projects from complete .NET merchandise systems to help-desk and chat tools
+
+  - organisation: Prosper IT Consulting
+    role: Web Developer
+    start: '2015-08'
+    end: '2015-09'
+    summary: >-
+      Front-end development of an ASP.NET MVC learning portal for a proprietary software development
+      course, hosted on Azure with ASP.NET Identity, OAuth and SQL Server.
+
+  - organisation: Now Nerd
+    role: Front End Developer
+    start: '2015-03'
+    end: '2015-08'
+    summary: >-
+      Front-end web and app development for a SaaS product: admin-heavy applications integrated with a
+      back-end API, plus data visualisation for the user dashboard.
+
+  - organisation: Independent
+    role: Web Developer
+    start: '2013-07'
+    end: Present
+    summary: >-
+      Full-stack JavaScript development with semantic HTML5, CSS3, Bootstrap, Vue, Ember and Node,
+      turning design comps and wireframes into pixel-accurate, mobile-first interfaces.
+    highlights:
+      - "Cloud Agent: an Ember + .NET app for monitoring and administering machines on a domain"
+      - "Cote d'Or Order Tracker: a .NET Core + Vue order and shipment tracker for a wine importer"
+
+  - organisation: Portland Code School
+    role: JavaScript Immersion
+    kind: education
+    start: '2014'
+    end: '2014'
+    url: http://www.portlandcodeschool.com/
+    summary: >-
+      Advanced web development with iterative and agile strategies, covering front-end and back-end
+      JavaScript (Ember.js, jQuery, Node.js), UI design principles and UX patterns.
+    highlights:
+      - Web standards, REST APIs, AJAX and persistence
+      - Prototypal vs classical inheritance, closures, scope and the event loop
+      - Test- and pseudocode-driven development
