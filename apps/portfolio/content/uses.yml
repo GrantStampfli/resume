@@ -1,0 +1,66 @@
+title: Software I use, tools I rely on, and other things I recommend.
+intro: >-
+  People ask what I use to build software and stay productive. Here is the stack behind most of my work,
+  from the editor to the deploy target.
+sections:
+  - title: Front end
+    tools:
+      - title: Vue 3 and Nuxt
+        href: https://nuxt.com
+        description: >-
+          My default for anything with a UI. Composition API, script setup and file-based routing keep
+          large apps readable; this site is Nuxt 4 with Nuxt Content.
+      - title: TypeScript
+        href: https://www.typescriptlang.org
+        description: >-
+          Every new file. Explicit types on component props and return values catch most mistakes before
+          the browser does.
+      - title: Tailwind CSS
+        href: https://tailwindcss.com
+        description: >-
+          Utility classes and a design token file beat a growing pile of custom CSS. This site uses the
+          Tailwind Plus Spotlight template as its base.
+      - title: Vitest and Jest
+        href: https://vitest.dev
+        description: >-
+          Component and view tests written alongside the code. Test-driven front ends were what kept UI
+          regressions out of production at Fleet and Koho.
+  - title: Back end
+    tools:
+      - title: Ruby on Rails
+        href: https://rubyonrails.org
+        description: >-
+          The API behind the freight products I have worked on for the last several years. Boring in the
+          best way.
+      - title: PostgreSQL
+        href: https://www.postgresql.org
+        description: >-
+          Reliable, well understood, and fast enough for everything I have thrown at it.
+      - title: Node.js and Nitro
+        href: https://nitro.build
+        description: >-
+          For server routes, build scripts and the small services that glue a monorepo together.
+  - title: Tooling
+    tools:
+      - title: pnpm and Turborepo
+        href: https://turborepo.com
+        description: >-
+          Workspaces with a version catalog and cached task pipelines. One install, one lint config, one
+          build command for three apps.
+      - title: ESLint with @antfu/eslint-config
+        href: https://github.com/antfu/eslint-config
+        description: >-
+          One config for linting and formatting, no Prettier. Runs on save and on pre-commit.
+      - title: GitHub Actions and Vercel
+        href: https://vercel.com
+        description: >-
+          CI on every push, GitHub Pages for the resume site, Vercel for the Nuxt apps.
+  - title: Workstation
+    tools:
+      - title: Linux servers (Debian and Ubuntu)
+        description: >-
+          Comfortable configuring Nginx, Apache and PostgreSQL by hand when a managed platform is not an
+          option.
+      - title: Photoshop
+        description: >-
+          Still my tool for high-fidelity mockups and turning design comps into layouts.

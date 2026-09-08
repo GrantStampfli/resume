@@ -24,6 +24,7 @@
     "test": "turbo run test",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --cache --fix",
+    "up": "taze -r -I",
     "resume-gen": "pnpm --filter @stampfli/resume-gen",
     "portfolio": "pnpm --filter @stampfli/portfolio",
     "admin": "pnpm --filter @stampfli/admin",
@@ -32,11 +33,13 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
+    "@antfu/ni": "catalog:",
     "@types/node": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-format": "catalog:",
     "lint-staged": "catalog:",
     "simple-git-hooks": "catalog:",
+    "taze": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:",
     "vercel": "catalog:"

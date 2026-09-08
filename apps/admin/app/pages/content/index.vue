@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
 import type { ContentEntry } from '#shared/types/content'
-import { projectTemplate } from '#shared/utils/frontmatter'
+import type { ContentKind } from '#shared/utils/frontmatter'
+import { CONTENT_KINDS, templateFor } from '#shared/utils/frontmatter'
 import { slugify } from '#shared/utils/paths'
 
 useSeoMeta({ title: 'Portfolio content' })
@@ -17,34 +18,47 @@ const columns: TableColumn<ContentEntry>[] = [
   { id: 'actions' },
 ]
 
+// Group files by their top-level folder: pages at the root, then articles, projects, …
 const groups = computed(() => {
-  const projects = entries.value.filter(entry => entry.path.startsWith('projects/'))
-  const pages = entries.value.filter(entry => !entry.path.startsWith('projects/'))
-  return [
-    { label: 'Pages', items: pages },
-    { label: 'Projects', items: projects },
-  ]
+  const byFolder = new Map<string, ContentEntry[]>()
+  for (const entry of entries.value) {
+    const folder = entry.path.includes('/') ? entry.path.split('/')[0]! : ''
+    byFolder.set(folder, [...(byFolder.get(folder) ?? []), entry])
+  }
+  return [...byFolder.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([folder, items]) => ({
+      label: folder ? folder[0]!.toUpperCase() + folder.slice(1) : 'Pages',
+      items,
+    }))
 })
 
 const creating = shallowRef(false)
+const creatingKind = shallowRef<ContentKind>('project')
 const newTitle = shallowRef('')
 const newSlug = computed(() => slugify(newTitle.value))
+const newPath = computed(() => newSlug.value ? `${CONTENT_KINDS[creatingKind.value].directory}/${newSlug.value}.md` : '')
 const busy = shallowRef(false)
 
-async function createProject(): Promise<void> {
-  if (!newSlug.value)
+function startCreating(kind: ContentKind): void {
+  creatingKind.value = kind
+  creating.value = true
+}
+
+async function createEntry(): Promise<void> {
+  if (!newPath.value)
     return
 
   busy.value = true
   try {
-    const path = `projects/${newSlug.value}.md`
-    await $fetch(contentUrl(path), { method: 'PUT', body: { raw: projectTemplate(newTitle.value.trim()) } })
+    const path = newPath.value
+    await $fetch(contentUrl(path), { method: 'PUT', body: { raw: templateFor(creatingKind.value, newTitle.value.trim()) } })
     creating.value = false
     newTitle.value = ''
     await navigateTo(`/content/${path}`)
   }
   catch (error) {
-    toast.add({ title: 'Could not create project', description: describe(error), color: 'error', icon: 'i-lucide-triangle-alert' })
+    toast.add({ title: `Could not create ${CONTENT_KINDS[creatingKind.value].label}`, description: describe(error), color: 'error', icon: 'i-lucide-triangle-alert' })
   }
   finally {
     busy.value = false
@@ -86,7 +100,8 @@ function formatDate(value: string | null): string {
       <UDashboardNavbar title="Portfolio content">
         <template #right>
           <StorageBadge :status="status" />
-          <UButton label="New project" icon="i-lucide-plus" @click="creating = true" />
+          <UButton label="New article" icon="i-lucide-pen-line" color="neutral" variant="outline" @click="startCreating('article')" />
+          <UButton label="New project" icon="i-lucide-plus" @click="startCreating('project')" />
         </template>
       </UDashboardNavbar>
     </template>
@@ -118,16 +133,16 @@ function formatDate(value: string | null): string {
         </UTable>
       </div>
 
-      <UModal v-model:open="creating" title="New project" description="Creates a markdown file under content/projects.">
+      <UModal v-model:open="creating" :title="`New ${CONTENT_KINDS[creatingKind].label}`" :description="`Creates a markdown file under content/${CONTENT_KINDS[creatingKind].directory}.`">
         <template #body>
-          <UFormField label="Title" name="title" :help="newSlug ? `projects/${newSlug}.md` : undefined">
-            <UInput v-model="newTitle" placeholder="My next project" autofocus class="w-full" @keydown.enter="createProject" />
+          <UFormField label="Title" name="title" :help="newPath || undefined">
+            <UInput v-model="newTitle" :placeholder="CONTENT_KINDS[creatingKind].placeholder" autofocus class="w-full" @keydown.enter="createEntry" />
           </UFormField>
         </template>
         <template #footer>
           <div class="flex justify-end gap-2 w-full">
             <UButton label="Cancel" color="neutral" variant="ghost" @click="creating = false" />
-            <UButton label="Create" :disabled="!newSlug" :loading="busy" @click="createProject" />
+            <UButton label="Create" :disabled="!newPath" :loading="busy" @click="createEntry" />
           </div>
         </template>
       </UModal>
