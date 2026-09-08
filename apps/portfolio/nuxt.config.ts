@@ -48,6 +48,9 @@ export default defineNuxtConfig({
     // Server-only; set via EDGE_CONFIG / FLAGS_SECRET on Vercel.
     edgeConfig: '',
     flagsSecret: '',
+    resendApiKey: '',
+    contactTo: '',
+    contactFrom: '',
     public: {
       siteUrl: 'https://grantstampfli.com',
       resumeUrl: 'https://gstampfli.com',
@@ -56,7 +59,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/': { prerender: true },
-    '/about': { prerender: true },
+    '/about': { redirect: { to: '/#about', statusCode: 301 } },
     '/projects': { prerender: true },
     '/projects/**': { isr: 3600 },
     '/api/**': { cors: true },
@@ -77,7 +80,7 @@ export default defineNuxtConfig({
   },
 
   icon: {
-    provider: 'iconify',
+    provider: 'server',
     serverBundle: {
       collections: ['lucide', 'simple-icons'],
     },

@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   },
 
   icon: {
-    provider: 'iconify',
+    provider: 'server',
     serverBundle: {
       collections: ['lucide'],
     },

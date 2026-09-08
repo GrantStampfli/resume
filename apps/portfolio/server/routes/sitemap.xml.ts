@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   ])
 
   const urls: { loc: string, lastmod?: string }[] = [
-    ...pages.map(page => ({ loc: page.path })),
+    ...pages.filter(page => page.path === '/').map(page => ({ loc: page.path })),
     { loc: '/projects' },
     ...projects.map(project => ({ loc: project.path, lastmod: project.date })),
   ]

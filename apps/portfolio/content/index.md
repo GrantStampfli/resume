@@ -1,22 +1,21 @@
 ---
 title: Grant Stampfli
 headline: Senior Full Stack Engineer
-description: I build Vue and Rails products for logistics companies — from component libraries to instant-rate booking flows.
+description: Web developer and JavaScript enthusiast building Vue and Rails products for logistics companies.
+avatar: /images/avatar.jpg
+slides:
+  - /images/bg/slide-1.jpg
+  - /images/bg/slide-2.jpg
+  - /images/bg/slide-3.jpg
+  - /images/bg/slide-4.jpg
 links:
-  - label: View projects
-    to: /projects
-    trailingIcon: i-lucide-arrow-right
-  - label: Resume
-    to: https://gstampfli.com
+  - label: See my work
+    to: '#work'
+    trailingIcon: i-lucide-arrow-down
+  - label: Download my resume
+    to: https://gstampfli.com/resume.pdf
     target: _blank
     color: neutral
     variant: outline
-    icon: i-lucide-file-text
+    icon: i-lucide-file-down
 ---
-
-I am a Portland-based engineer with a decade of experience shipping web applications. Most recently I have
-been building freight and 3PL platforms at Expeditors and Fleet Logistics, working across Ruby on Rails
-back ends and Vue front ends with a test-driven workflow.
-
-This site is managed through the admin app in the same monorepo, so the copy you are reading lives in a
-markdown file under `content/`.

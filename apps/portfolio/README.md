@@ -12,13 +12,19 @@ pnpm portfolio typecheck
 
 ## Content
 
-| Path                    | Collection | Notes                                                    |
-| ----------------------- | ---------- | -------------------------------------------------------- |
-| `content/index.md`      | `pages`    | Home page hero copy and intro                            |
-| `content/about.md`      | `pages`    | About page                                               |
-| `content/projects/*.md` | `projects` | One file per project; see `content.config.ts` for schema |
+| Path                     | Collection   | Notes                                                    |
+| ------------------------ | ------------ | -------------------------------------------------------- |
+| `content/index.md`       | `pages`      | Hero: name, headline, avatar, background slides, buttons |
+| `content/about.md`       | `pages`      | About section copy and pull quote                        |
+| `content/tech.yml`       | `tech`       | Technologies grid (name + iconify icon)                  |
+| `content/experience.yml` | `experience` | Work history and education timeline                      |
+| `content/projects/*.md`  | `projects`   | One file per project; see `content.config.ts` for schema |
 
 Everything under `content/` can be edited from the admin app (`apps/admin`).
+
+The home page is a single scrolling page (hero → about → tech → work → experience → contact) modelled on
+the previous `online-portfolio` / `gstampfli.com` sites; their background slides, avatar, project art and
+Voltaire/Open Sans fonts live under `public/`. The contact form posts to `/api/contact` (Resend).
 
 ## Vercel integrations
 

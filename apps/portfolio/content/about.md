@@ -1,22 +1,18 @@
 ---
 title: About
-headline: Hello
-description: A little more about how I work and what I care about.
+headline: Do you want to blend in, or do you want to stand out?
+description: A conscientious, innovative and driven engineer with a mission to be more than an "individual contributor".
+quote: A great front-end developer brings designs to the fullness of the designer's intention and builds a page that stays flexible and successful for years into the future.
 ---
 
-## How I work
+I am a Portland-based engineer with more than a decade of experience shipping web applications. My aim
+has never been to be an "individual contributor" alone, but the person who maximises the contribution
+and success of the whole team.
 
-I like small, well-tested increments, honest code review, and interfaces that feel obvious to the people
-using them. I have led front-end teams, mentored developers, and spent plenty of time in the weeds of
-CSS, accessibility and build tooling.
+Most recently I have been building freight and 3PL platforms at Expeditors and Fleet Logistics, working
+across Ruby on Rails back ends and Vue front ends with a test-driven workflow. Before that I led a
+front-end team at Platt Electric Supply and mentored developers in JavaScript.
 
-## Stack
-
-- **Front end:** Vue, Nuxt, TypeScript, Tailwind, Jest/Vitest
-- **Back end:** Ruby on Rails, Node, PostgreSQL
-- **Ops:** Linux, Nginx, Vercel, GitHub Actions
-
-## Elsewhere
-
-You can find my full work history on my [resume](https://gstampfli.com), or reach me at
-[mail@gstampfli.com](mailto:mail@gstampfli.com).
+I care about user-friendly, standards-based, visually engaging interfaces, from concept through testing.
+Strong attention to detail, comfortable running several complex projects at once, and always chasing what
+is new in the platform.
