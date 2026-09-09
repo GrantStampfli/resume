@@ -15,6 +15,7 @@
   "dependencies": {
     "@iconify-json/lucide": "catalog:",
     "@nuxt/ui": "catalog:",
+    "@stampfli/content-db": "workspace:*",
     "@vercel/analytics": "catalog:",
     "@vercel/blob": "catalog:",
     "@vercel/functions": "catalog:",

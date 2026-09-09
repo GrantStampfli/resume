@@ -11,7 +11,7 @@ const schema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  await requireAdmin(event)
+  const user = await requireAdmin(event)
 
   let path: string
   try {
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
   const fullPath = `${PORTFOLIO_CONTENT_DIR}/${path}`
   const created = (await store.read(fullPath)) === null
 
-  await store.write(fullPath, raw.endsWith('\n') ? raw : `${raw}\n`, `content(portfolio): ${created ? 'add' : 'update'} ${path} via admin`)
+  await store.write(fullPath, raw.endsWith('\n') ? raw : `${raw}\n`, `content(portfolio): ${created ? 'add' : 'update'} ${path} via admin`, user.name)
   triggerDeploy(`content:${path}`)
 
   return { ok: true, created, driver, path }

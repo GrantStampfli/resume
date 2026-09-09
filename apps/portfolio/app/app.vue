@@ -3,7 +3,7 @@ const config = useRuntimeConfig()
 const appConfig = useAppConfig()
 
 useHead({
-  titleTemplate: title => title && title !== appConfig.site.name ? `${title} · ${appConfig.site.name}` : appConfig.site.name,
+  titleTemplate: title => title && title !== appConfig.site.name ? `${title} - ${appConfig.site.name}` : `${appConfig.site.name} - ${appConfig.site.tagline}`,
   link: [
     { rel: 'canonical', href: config.public.siteUrl },
   ],
@@ -18,9 +18,11 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <NuxtLoadingIndicator />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div class="flex w-full">
+      <NuxtLoadingIndicator color="#14b8a6" />
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
   </UApp>
 </template>

@@ -25,9 +25,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Server-only. Every key can be overridden with NUXT_<KEY> env vars.
     adminPassword: '',
+    /** Overrides CONTENT_DATABASE_URL / DATABASE_URL when set. */
+    contentDatabaseUrl: '',
     storage: {
-      // 'fs' edits the files in this monorepo checkout (local dev),
-      // 'github' commits straight to the repository (production on Vercel).
+      // 'db' stores content as database rows (default when a database URL is configured),
+      // 'fs' edits the files in this monorepo checkout, 'github' commits to the repository.
       driver: '',
       root: fileURLToPath(new URL('../..', import.meta.url)),
     },

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ResumeFile } from '#shared/types/content'
+import { RESUME_PATH } from '#shared/utils/paths'
 
 useSeoMeta({ title: 'Resume' })
 
@@ -14,6 +15,7 @@ const dirty = computed(() => draft.value !== (resume.value?.raw ?? ''))
 const saving = shallowRef(false)
 const building = shallowRef(false)
 const buildOutput = shallowRef<string | null>(null)
+const historyOpen = shallowRef(false)
 
 async function save(): Promise<void> {
   saving.value = true
@@ -65,6 +67,14 @@ onBeforeRouteLeave(() => {
         <template #right>
           <StorageBadge :status="status" />
           <UButton
+            v-if="status.storage === 'db'"
+            label="History"
+            icon="i-lucide-history"
+            color="neutral"
+            variant="ghost"
+            @click="historyOpen = true"
+          />
+          <UButton
             v-if="status.canBuildResume"
             label="Build HTML + PDF"
             icon="i-lucide-hammer"
@@ -95,6 +105,8 @@ onBeforeRouteLeave(() => {
       />
 
       <MarkdownEditor v-model="draft" placeholder="# Your Name" />
+
+      <RevisionHistory v-if="status.storage === 'db'" v-model:open="historyOpen" :path="RESUME_PATH" @restored="refresh()" />
 
       <UCard v-if="buildOutput" class="mt-4">
         <template #header>

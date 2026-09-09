@@ -1,21 +1,10 @@
 ---
-title: Grant Stampfli
-headline: Senior Full Stack Engineer
-description: Web developer and JavaScript enthusiast building Vue and Rails products for logistics companies.
-avatar: /images/avatar.jpg
-slides:
-  - /images/bg/slide-1.jpg
-  - /images/bg/slide-2.jpg
-  - /images/bg/slide-3.jpg
-  - /images/bg/slide-4.jpg
-links:
-  - label: See my work
-    to: '#work'
-    trailingIcon: i-lucide-arrow-down
-  - label: Download my resume
-    to: https://gstampfli.com/resume.pdf
-    target: _blank
-    color: neutral
-    variant: outline
-    icon: i-lucide-file-down
+title: Senior full stack engineer, Vue enthusiast, and occasional PHP archaeologist.
+description: I’m Grant, a senior full stack engineer based in Portland, Oregon. I build Vue and Rails products for logistics companies, from component libraries to instant-rate booking flows, and I care about interfaces that stay fast and obvious for years.
+photos:
+  - /images/photos/photo-1.jpg
+  - /images/photos/photo-2.jpg
+  - /images/photos/photo-3.jpg
+  - /images/photos/photo-4.jpg
+  - /images/photos/photo-5.jpg
 ---

@@ -1,18 +1,22 @@
 ---
-title: About
-headline: Do you want to blend in, or do you want to stand out?
-description: A conscientious, innovative and driven engineer with a mission to be more than an "individual contributor".
-quote: A great front-end developer brings designs to the fullness of the designer's intention and builds a page that stays flexible and successful for years into the future.
+title: I’m Grant Stampfli. I live in Portland, where I build web apps for the freight industry.
+description: Senior full stack engineer with more than a decade of shipping Vue and Rails products.
+portrait: /images/portrait.jpg
+email: mail@gstampfli.com
 ---
 
-I am a Portland-based engineer with more than a decade of experience shipping web applications. My aim
-has never been to be an "individual contributor" alone, but the person who maximises the contribution
-and success of the whole team.
+I’ve been building for the web since 2013, first as an independent developer turning Photoshop comps
+into pixel-accurate, mobile-first sites, then as a front-end team lead at Platt Electric Supply, where I
+mentored developers in JavaScript and shipped several ASP.NET MVC applications.
 
-Most recently I have been building freight and 3PL platforms at Expeditors and Fleet Logistics, working
-across Ruby on Rails back ends and Vue front ends with a test-driven workflow. Before that I led a
-front-end team at Platt Electric Supply and mentored developers in JavaScript.
+Since 2018 I have worked on freight platforms. At Fleet Logistics I built the customer-facing rate,
+booking and shipment tracking views for a digital freight forwarder. At Expeditors I work on Koho, a
+digital 3PL with instant LTL rates, where I built the Vue component library and a modern single page
+application on top of a Rails back end, with a test-driven workflow that keeps UI bugs out of production.
 
-I care about user-friendly, standards-based, visually engaging interfaces, from concept through testing.
-Strong attention to detail, comfortable running several complex projects at once, and always chasing what
-is new in the platform.
+My aim has never been to be an “individual contributor” alone. I like small, well-tested increments,
+honest code review, and interfaces that feel obvious to the people using them. I also keep an eye on
+tooling: this site is a pnpm and Turborepo monorepo, my resume is rendered from markdown by a PHP CLI,
+and both are edited through an admin app I built for myself.
+
+When I am not at a keyboard I am usually outside somewhere in the Pacific Northwest.

@@ -1,94 +1,48 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
-/* Self-hosted fonts carried over from the previous portfolio (Voltaire + Open Sans). */
-@font-face {
-  font-family: Voltaire;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/voltaire.woff') format('woff');
-}
-@font-face {
-  font-family: OpenSans;
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('/fonts/opensans-light.woff') format('woff');
-}
-@font-face {
-  font-family: OpenSans;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/opensans.woff') format('woff');
-}
-@font-face {
-  font-family: OpenSans;
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/opensans-bold.woff') format('woff');
+@plugin '@tailwindcss/typography';
+@config '../../../typography.ts';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 3.5rem;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 1;
 }
 
-@theme static {
-  --font-sans: OpenSans, ui-sans-serif, system-ui, sans-serif;
-  --font-display: Voltaire, 'Century Gothic', ui-sans-serif, sans-serif;
+/* Nuxt Content renders code blocks with shiki as one span per line. */
+.prose pre code .line {
+  display: block;
 }
 
-:root {
-  --ui-container: 72rem;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.font-display {
-  font-family: var(--font-display);
-}
-
-/* Hero background slideshow: each slide fades in for a quarter of the cycle. */
-.hero-slide {
-  animation: hero-fade 32s infinite;
-  opacity: 0;
-}
-.hero-slide:nth-child(1) {
-  animation-delay: 0s;
-}
-.hero-slide:nth-child(2) {
-  animation-delay: 8s;
-}
-.hero-slide:nth-child(3) {
-  animation-delay: 16s;
-}
-.hero-slide:nth-child(4) {
-  animation-delay: 24s;
-}
-
-@keyframes hero-fade {
-  0% {
-    opacity: 0;
-  }
-  6% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 1;
-  }
-  31% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-slide {
-    animation: none;
-  }
-  .hero-slide:first-child {
-    opacity: 1;
-  }
+/* Headings rendered by Nuxt Content may wrap their text in an anchor; keep them looking like headings. */
+.prose :is(h2, h3, h4) a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
 }

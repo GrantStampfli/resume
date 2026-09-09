@@ -6,7 +6,7 @@ import { triggerDeploy } from '../../utils/deploy'
 import { useContentStore } from '../../utils/store'
 
 export default defineEventHandler(async (event) => {
-  await requireAdmin(event)
+  const user = await requireAdmin(event)
 
   let path: string
   try {
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const { store } = useContentStore(event)
-  await store.remove(`${PORTFOLIO_CONTENT_DIR}/${path}`, `content(portfolio): remove ${path} via admin`)
+  await store.remove(`${PORTFOLIO_CONTENT_DIR}/${path}`, `content(portfolio): remove ${path} via admin`, user.name)
   triggerDeploy(`content:${path}`)
 
   return { ok: true, path }

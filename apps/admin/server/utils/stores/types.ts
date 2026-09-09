@@ -10,6 +10,7 @@ export interface ContentStore {
   list: (directory: string) => Promise<StoredEntry[]>
   /** Returns the file contents, or null when it does not exist. */
   read: (path: string) => Promise<string | null>
-  write: (path: string, content: string, message: string) => Promise<void>
-  remove: (path: string, message: string) => Promise<void>
+  /** `message` is the commit message for the git backed store; `author` is recorded by the database store. */
+  write: (path: string, content: string, message: string, author?: string) => Promise<void>
+  remove: (path: string, message: string, author?: string) => Promise<void>
 }

@@ -4,17 +4,10 @@ const route = useRoute()
 const { data: project } = await useAsyncData(`project-${route.params.slug}`, () =>
   queryCollection('projects').path(route.path).first())
 
-if (!project.value || project.value.draft) {
+if (!project.value || project.value.draft)
   throw createError({ statusCode: 404, statusMessage: 'Project not found', fatal: true })
-}
-
-const { data: surround } = await useAsyncData(`project-${route.params.slug}-surround`, () =>
-  queryCollectionItemSurroundings('projects', route.path, { fields: ['title', 'description'] }))
 
 const stack = computed(() => project.value?.stack ?? [])
-
-const formattedDate = computed(() =>
-  new Date(project.value!.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }))
 
 useSeoMeta({
   title: project.value.title,
@@ -30,50 +23,27 @@ defineOgImageComponent('Site', {
 </script>
 
 <template>
-  <UPage v-if="project">
-    <UPageHeader :title="project.title" :description="project.description" :headline="formattedDate">
-      <template #links>
-        <UButton
-          v-if="project.url"
-          :to="project.url"
-          target="_blank"
-          label="Visit"
-          icon="i-lucide-external-link"
-          color="neutral"
-          variant="outline"
-          size="sm"
-        />
-        <UButton
-          v-if="project.repo"
-          :to="project.repo"
-          target="_blank"
-          label="Source"
-          icon="i-simple-icons-github"
-          color="neutral"
-          variant="outline"
-          size="sm"
-        />
-      </template>
-    </UPageHeader>
-
-    <UPageBody>
-      <div v-if="stack.length" class="flex flex-wrap gap-2 mb-8">
-        <UBadge v-for="item in stack" :key="item" :label="item" color="neutral" variant="subtle" />
+  <ArticleLayout v-if="project" :title="project.title" :date="project.date" back-to="/projects" back-label="Go back to projects">
+    <template #meta>
+      <p class="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+        {{ project.description }}
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium">
+        <NuxtLink v-if="project.url" :to="project.url" target="_blank" external class="group flex items-center text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200">
+          <IconsLinkIcon class="h-6 w-6 flex-none fill-zinc-400 transition group-hover:fill-teal-500" />
+          <span class="ml-2">Visit site</span>
+        </NuxtLink>
+        <NuxtLink v-if="project.repo" :to="project.repo" target="_blank" external class="group flex items-center text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200">
+          <IconsGitHubIcon class="h-6 w-6 flex-none fill-zinc-400 transition group-hover:fill-teal-500" />
+          <span class="ml-2">Source</span>
+        </NuxtLink>
       </div>
-
-      <NuxtImg
-        v-if="project.image"
-        :src="project.image"
-        :alt="project.title"
-        class="rounded-lg mb-8 w-full"
-        sizes="100vw md:768px lg:1024px"
-      />
-
-      <ContentRenderer :value="project" class="prose dark:prose-invert max-w-none" />
-
-      <USeparator class="my-10" />
-
-      <UContentSurround :surround="surround ?? []" />
-    </UPageBody>
-  </UPage>
+      <ul v-if="stack.length" class="mt-6 flex flex-wrap gap-2">
+        <li v-for="item in stack" :key="item" class="rounded-full bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 ring-1 ring-zinc-900/5 dark:bg-zinc-800/50 dark:text-zinc-300 dark:ring-white/10">
+          {{ item }}
+        </li>
+      </ul>
+    </template>
+    <ContentRenderer :value="project" />
+  </ArticleLayout>
 </template>

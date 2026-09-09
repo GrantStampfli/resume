@@ -10,6 +10,9 @@
       "env": [
         "NUXT_*",
         "BLOB_READ_WRITE_TOKEN",
+        "CONTENT_DATABASE_URL",
+        "DATABASE_URL",
+        "POSTGRES_URL",
         "EDGE_CONFIG",
         "FLAGS_SECRET",
         "RESUME_*",
@@ -19,7 +22,7 @@
     },
     "generate": {
       "dependsOn": ["^build"],
-      "env": ["NUXT_*", "EDGE_CONFIG", "FLAGS_SECRET"],
+      "env": ["NUXT_*", "CONTENT_DATABASE_URL", "DATABASE_URL", "POSTGRES_URL", "EDGE_CONFIG", "FLAGS_SECRET"],
       "outputs": [".output/**", "dist/**"]
     },
     "dev": {

@@ -1,0 +1,17 @@
+title: Talks, podcasts and the occasional meetup.
+intro: >-
+  I enjoy sharing what I have learned about Vue, front-end architecture and working in small teams.
+  This page lists talks and interviews as they happen.
+sections:
+  - title: Conferences
+    appearances: []
+  - title: Podcasts
+    appearances: []
+# Example entry:
+#  - title: Conferences
+#    appearances:
+#      - title: Building a Vue component library for a freight platform
+#        description: How we structured, tested and shipped a shared component library at Koho.
+#        event: VueConf 2026
+#        cta: Watch video
+#        href: https://example.com/talk

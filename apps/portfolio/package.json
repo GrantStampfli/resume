@@ -1,9 +1,9 @@
 {
   "name": "@stampfli/portfolio",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Grant Stampfli's portfolio site (Nuxt 4 + Nuxt UI + Nuxt Content, deployed on Vercel)",
+  "description": "Grant Stampfli's portfolio site: a Nuxt 4 + Tailwind CSS port of the Tailwind Plus Spotlight template, content managed with Nuxt Content, deployed on Vercel",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --port 3000",
@@ -14,20 +14,22 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@iconify-json/lucide": "catalog:",
-    "@iconify-json/simple-icons": "catalog:",
     "@nuxt/content": "catalog:",
     "@nuxt/image": "catalog:",
     "@nuxt/ui": "catalog:",
+    "@nuxtjs/color-mode": "catalog:",
+    "@stampfli/content-db": "workspace:*",
+    "@tailwindcss/typography": "catalog:",
     "@takumi-rs/core": "catalog:",
     "@vercel/analytics": "catalog:",
     "@vercel/edge-config": "catalog:",
     "@vercel/functions": "catalog:",
     "@vercel/speed-insights": "catalog:",
-    "@vueuse/core": "catalog:",
+    "feed": "catalog:",
     "flags": "catalog:",
     "nuxt": "catalog:",
     "nuxt-og-image": "catalog:",
+    "tailwindcss": "catalog:",
     "vue": "catalog:",
     "zod": "catalog:"
   },

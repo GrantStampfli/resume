@@ -9,6 +9,7 @@ vendor/
 .cache/
 .data/
 dist/
+*.db
 .turbo/
 .vercel/
 

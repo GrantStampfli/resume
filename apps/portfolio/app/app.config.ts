@@ -1,27 +1,28 @@
 export default defineAppConfig({
+  // Nuxt UI components pick up the Spotlight palette: teal accents on zinc.
   ui: {
     colors: {
-      primary: 'sky',
+      primary: 'teal',
       neutral: 'zinc',
     },
   },
   site: {
     name: 'Grant Stampfli',
-    tagline: 'Web Developer / JavaScript Enthusiast',
+    tagline: 'Senior full stack engineer building Vue and Rails products',
+    description: 'I’m Grant, a senior full stack engineer based in Portland, Oregon. I build Vue and Rails products for logistics companies, from component libraries to instant-rate booking flows.',
     email: 'mail@gstampfli.com',
     location: 'Portland, OR',
   },
   socials: [
-    { label: 'GitHub', to: 'https://github.com/grantstampfli', icon: 'i-simple-icons-github' },
-    { label: 'LinkedIn', to: 'https://www.linkedin.com/in/grantstampfli', icon: 'i-simple-icons-linkedin' },
-    { label: 'X / Twitter', to: 'https://twitter.com/grantstampfli', icon: 'i-simple-icons-x' },
-  ],
+    { label: 'Follow on X', href: 'https://twitter.com/grantstampfli', icon: 'x' },
+    { label: 'Follow on GitHub', href: 'https://github.com/grantstampfli', icon: 'github' },
+    { label: 'Follow on LinkedIn', href: 'https://www.linkedin.com/in/grantstampfli', icon: 'linkedin' },
+  ] satisfies { label: string, href: string, icon: 'x' | 'github' | 'linkedin' | 'instagram' }[],
   nav: [
-    { label: 'About', to: '#about' },
-    { label: 'Tech', to: '#tech' },
-    { label: 'Work', to: '#work' },
-    { label: 'Experience', to: '#experience' },
-    { label: 'Contact', to: '#contact' },
+    { label: 'About', to: '/about' },
+    { label: 'Articles', to: '/articles' },
     { label: 'Projects', to: '/projects' },
+    { label: 'Speaking', to: '/speaking' },
+    { label: 'Uses', to: '/uses' },
   ],
 })

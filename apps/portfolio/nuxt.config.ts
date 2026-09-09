@@ -6,16 +6,24 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/content',
     '@nuxt/image',
+    '@nuxtjs/color-mode',
     'nuxt-og-image',
   ],
 
   devtools: { enabled: true },
 
   app: {
+    // Give the Nuxt root a definite width so the photo strip's min-content width cannot
+    // widen the page on small screens (same reason Spotlight wraps its layout in `flex w-full`).
+    rootAttrs: { class: 'flex w-full min-w-0' },
     head: {
-      htmlAttrs: { lang: 'en' },
+      htmlAttrs: { lang: 'en', class: 'h-full antialiased' },
+      bodyAttrs: { class: 'flex h-full bg-zinc-50 dark:bg-black' },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
+      link: [
+        { rel: 'alternate', type: 'application/rss+xml', href: '/feed.xml' },
       ],
     },
   },
@@ -27,6 +35,13 @@ export default defineNuxtConfig({
     name: 'Grant Stampfli',
   },
 
+  // Spotlight toggles a `dark` class on <html>.
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
+  },
+
   content: {
     experimental: {
       // Node 22 ships sqlite, so no native better-sqlite3 build is needed.
@@ -35,10 +50,8 @@ export default defineNuxtConfig({
     build: {
       markdown: {
         highlight: {
-          theme: {
-            default: 'github-light',
-            dark: 'github-dark',
-          },
+          // Spotlight's code blocks are always dark.
+          theme: 'github-dark',
         },
       },
     },
@@ -48,9 +61,6 @@ export default defineNuxtConfig({
     // Server-only; set via EDGE_CONFIG / FLAGS_SECRET on Vercel.
     edgeConfig: '',
     flagsSecret: '',
-    resendApiKey: '',
-    contactTo: '',
-    contactFrom: '',
     public: {
       siteUrl: 'https://grantstampfli.com',
       resumeUrl: 'https://gstampfli.com',
@@ -59,8 +69,14 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/': { prerender: true },
-    '/about': { redirect: { to: '/#about', statusCode: 301 } },
+    '/about': { prerender: true },
+    '/articles': { prerender: true },
     '/projects': { prerender: true },
+    '/speaking': { prerender: true },
+    '/uses': { prerender: true },
+    '/thank-you': { prerender: true },
+    '/feed.xml': { prerender: true },
+    '/articles/**': { isr: 3600 },
     '/projects/**': { isr: 3600 },
     '/api/**': { cors: true },
   },
@@ -70,20 +86,13 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/sitemap.xml'],
+      routes: ['/', '/sitemap.xml', '/feed.xml'],
     },
   },
 
   typescript: {
     strict: true,
     typeCheck: false,
-  },
-
-  icon: {
-    provider: 'server',
-    serverBundle: {
-      collections: ['lucide', 'simple-icons'],
-    },
   },
 
   image: {
