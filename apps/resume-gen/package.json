@@ -16,5 +16,8 @@
     "test": "composer test --working-dir=app",
     "lint:php": "composer lint --working-dir=app",
     "lint:php:fix": "composer lint:fix --working-dir=app"
+  },
+  "dependencies": {
+    "@stampfli/content-db": "workspace:*"
   }
 }

@@ -33,13 +33,29 @@ app/bin/resume stats resume.md
 
 ### Environment variables
 
-| Variable               | Purpose                                                              |
-| ---------------------- | -------------------------------------------------------------------- |
-| `RESUME_TEMPLATE`      | Template used by `pnpm build` (default `modern`)                     |
-| `RESUME_SKIP_PDF`      | Set to `1` to skip PDF generation                                    |
-| `RESUME_PDF_ENGINE`    | Force `chromium` or `wkhtmltopdf`                                    |
-| `RESUME_CHROMIUM_PATH` | Explicit path to a Chrome/Chromium binary (`CHROME_PATH` also works) |
-| `RESUME_TEMPLATE_PATH` | Directory containing templates (defaults to `app/templates`)         |
+| Variable               | Purpose                                                                  |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `RESUME_TEMPLATE`      | Template used by `pnpm build` (default `modern`)                         |
+| `RESUME_SKIP_PDF`      | Set to `1` to skip PDF generation                                        |
+| `RESUME_PDF_ENGINE`    | Force `chromium` or `wkhtmltopdf`                                        |
+| `RESUME_CHROMIUM_PATH` | Explicit path to a Chrome/Chromium binary (`CHROME_PATH` also works)     |
+| `RESUME_TEMPLATE_PATH` | Directory containing templates (defaults to `app/templates`)             |
+| `CONTENT_DATABASE_URL` | Build from the resume row in the content database instead of `resume.md` |
+
+## Content source
+
+By default the build reads [`resume.md`](./resume.md) from this directory. When
+`CONTENT_DATABASE_URL` (or `DATABASE_URL` / `POSTGRES_URL`) is set — the mode where the admin saves
+the resume as a database row rather than a commit — `scripts/build.mjs` materialises the
+`apps/resume-gen/resume.md` row into `.data/resume.md` and builds from that, leaving the checked-in
+file alone. If no row exists yet it falls back to the checkout.
+
+The database client is imported lazily, so without a database URL this script still needs nothing but
+Node, PHP and Composer.
+
+Because a database save produces no commit, the admin pings a `resume-updated`
+[`repository_dispatch`](../../.github/workflows/deploy-resume.yml) to rebuild the published resume;
+that workflow passes `secrets.CONTENT_DATABASE_URL` through to this build.
 
 ## Templates
 

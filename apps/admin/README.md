@@ -42,8 +42,14 @@ Rows are keyed by repository-relative path (`apps/resume-gen/resume.md`,
   already have a row unless you tick _overwrite_, so an import never clobbers an edit.
 - **History** on the resume and content editors lists revisions and restores one. Deletes keep a revision
   too, so a removed page can be brought back.
-- Publishing is unchanged: a save updates the database, and the deploy hook rebuilds the portfolio, which
-  reads the same rows at build time.
+- Publishing: a save updates the database, then the site that renders it is rebuilt, because nothing is
+  committed to trigger a build on its own.
+  - **Portfolio** — `NUXT_VERCEL_DEPLOY_HOOK_URL` is pinged, and the build reads the rows.
+  - **Resume** — a `resume-updated` `repository_dispatch` is sent to `NUXT_GITHUB_REPO`, which runs
+    `deploy-resume.yml`; that workflow needs a `CONTENT_DATABASE_URL` repository secret so the generator
+    reads the same row. This uses `NUXT_GITHUB_TOKEN`, so the token is required in database mode too —
+    without it the save succeeds and the published resume silently stays stale, which the server logs warn
+    about.
 
 ## Auth
 

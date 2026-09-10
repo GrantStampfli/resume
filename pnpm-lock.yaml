@@ -320,7 +320,11 @@ importers:
         specifier: 'catalog:'
         version: 3.3.11(typescript@5.9.3)
 
-  apps/resume-gen: {}
+  apps/resume-gen:
+    dependencies:
+      '@stampfli/content-db':
+        specifier: workspace:*
+        version: link:../../packages/content-db
 
   packages/content-db:
     dependencies:
