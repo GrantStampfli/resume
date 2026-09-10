@@ -1,8 +1,9 @@
 // @env node
 
+import { RESUME_PATH } from '#shared/utils/paths'
 import { requireAdmin } from '../../../utils/auth'
 import { requireDatabase } from '../../../utils/database'
-import { triggerDeploy } from '../../../utils/deploy'
+import { triggerDeploy, triggerResumeBuild } from '../../../utils/deploy'
 
 export default defineEventHandler(async (event) => {
   const user = await requireAdmin(event)
@@ -20,6 +21,10 @@ export default defineEventHandler(async (event) => {
   // Writing the old body forward keeps the history linear: the current body becomes a revision too.
   await database.write(revision.path, revision.body, user.name)
   triggerDeploy(`restore:${revision.path}`)
+
+  // This endpoint only runs on the database driver, so a restored resume has no commit either.
+  if (revision.path === RESUME_PATH)
+    triggerResumeBuild()
 
   return { ok: true, path: revision.path, id }
 })

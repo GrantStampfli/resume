@@ -3,7 +3,7 @@
 import { z } from 'zod'
 import { RESUME_PATH } from '#shared/utils/paths'
 import { requireAdmin } from '../../utils/auth'
-import { triggerDeploy } from '../../utils/deploy'
+import { triggerDeploy, triggerResumeBuild } from '../../utils/deploy'
 import { useContentStore } from '../../utils/store'
 
 const schema = z.object({
@@ -18,6 +18,9 @@ export default defineEventHandler(async (event) => {
 
   await store.write(RESUME_PATH, raw.endsWith('\n') ? raw : `${raw}\n`, 'chore(resume): update resume.md via admin', user.name)
   triggerDeploy('resume')
+
+  if (driver === 'db')
+    triggerResumeBuild()
 
   return { ok: true, driver }
 })

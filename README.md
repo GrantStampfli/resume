@@ -42,10 +42,14 @@ Dependency versions are pinned once in the `catalog:` section of `pnpm-workspace
 Content lives in the repository as markdown and YAML (`apps/resume-gen/resume.md`,
 `apps/portfolio/content/**`) and the admin edits those files through the `fs` or `github` driver.
 
-Set `CONTENT_DATABASE_URL` (or `DATABASE_URL` / `POSTGRES_URL`) in both Nuxt apps and content moves to a
-database instead: the admin writes rows — with revision history and restore — and the portfolio builds
-from the same rows. Postgres in production, a SQLite file locally. See
-[`packages/content-db`](packages/content-db).
+Set `CONTENT_DATABASE_URL` (or `DATABASE_URL` / `POSTGRES_URL`) and content moves to a database instead:
+the admin writes rows — with revision history and restore — and both sites build from the same rows.
+Postgres in production, a SQLite file locally. See [`packages/content-db`](packages/content-db).
+
+Because a database save is not a commit, each site is rebuilt explicitly: the portfolio through
+`NUXT_VERCEL_DEPLOY_HOOK_URL`, the resume through a `resume-updated` `repository_dispatch` that runs
+`deploy-resume.yml`. Set `CONTENT_DATABASE_URL` in all three places — both Vercel projects and as a
+repository secret for that workflow.
 
 ## CI / deploys
 

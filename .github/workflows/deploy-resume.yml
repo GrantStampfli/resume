@@ -7,6 +7,10 @@ on:
       - apps/resume-gen/**
       - .github/workflows/deploy-resume.yml
   workflow_dispatch:
+  # Sent by the admin when it saves the resume to the content database, where there is no
+  # commit to trigger the push build.
+  repository_dispatch:
+    types: [resume-updated]
 
 permissions:
   contents: read
@@ -33,15 +37,25 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
+          cache: pnpm
 
       - run: composer install --no-interaction --no-progress --prefer-dist --no-dev --working-dir=app
+
+      # Only the generator and its workspace dependencies; the build reads the resume from the
+      # content database when one is configured.
+      - name: Install workspace dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile --filter @stampfli/resume-gen...
 
       - name: Build HTML + PDF
         env:
           RESUME_CHROMIUM_PATH: /usr/bin/google-chrome
+          CONTENT_DATABASE_URL: ${{ secrets.CONTENT_DATABASE_URL }}
         run: node scripts/build.mjs
 
       - uses: actions/upload-pages-artifact@v3
