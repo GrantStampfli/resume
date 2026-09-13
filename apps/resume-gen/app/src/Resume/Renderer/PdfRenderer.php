@@ -57,7 +57,7 @@ final class PdfRenderer
         $tmpHtml = $workDir.\DIRECTORY_SEPARATOR.'.tmp_pdf_source_'.bin2hex(random_bytes(4)).'.html';
         $tmpProfile = $workDir.\DIRECTORY_SEPARATOR.'.tmp_chrome_profile_'.bin2hex(random_bytes(4));
         file_put_contents($tmpHtml, $html);
-        mkdir($tmpProfile, 0700, true);
+        mkdir($tmpProfile, 0o700, true);
 
         try {
             if (is_file($destination)) {
