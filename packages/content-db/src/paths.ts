@@ -1,9 +1,9 @@
 /**
- * Content is keyed by its path relative to the repository root, so the resume markdown and
+ * Content is keyed by its path relative to the repository root, so the resume YAML and
  * every portfolio content file live in one table.
  */
 
-export const RESUME_PATH = 'apps/resume-gen/resume.md'
+export const RESUME_PATH = 'apps/resume-gen/resume.yml'
 export const PORTFOLIO_CONTENT_DIR = 'apps/portfolio/content'
 
 export const EDITABLE_EXTENSIONS = ['.md', '.yml', '.yaml', '.json'] as const

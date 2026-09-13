@@ -38,6 +38,6 @@ describe('portfolio paths', () => {
     const path = portfolioContentPath('articles/hello.md')
     expect(path).toBe('apps/portfolio/content/articles/hello.md')
     expect(portfolioContentKey(path)).toBe('articles/hello.md')
-    expect(portfolioContentKey('apps/resume-gen/resume.md')).toBeNull()
+    expect(portfolioContentKey('apps/resume-gen/resume.yml')).toBeNull()
   })
 })

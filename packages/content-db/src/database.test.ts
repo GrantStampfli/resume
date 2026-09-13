@@ -52,7 +52,7 @@ describe('contentDatabase', () => {
   it('counts entries below a prefix', async () => {
     await database.write('apps/portfolio/content/articles/a.md', 'a')
     await database.write('apps/portfolio/content/articles/b.md', 'b')
-    await database.write('apps/resume-gen/resume.md', 'r')
+    await database.write('apps/resume-gen/resume.yml', 'r')
 
     expect(await database.count('apps/portfolio/content/')).toBe(2)
     expect(await database.count()).toBe(3)

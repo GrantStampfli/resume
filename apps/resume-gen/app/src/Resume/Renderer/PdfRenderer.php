@@ -15,12 +15,13 @@ final class PdfRenderer
     public const ENGINE_CHROMIUM = 'chromium';
     public const ENGINE_WKHTMLTOPDF = 'wkhtmltopdf';
 
+    // Prefer Google Chrome over distro Chromium — the latter often hangs on --print-to-pdf in CI.
     private const CHROMIUM_CANDIDATES = [
-        'chromium',
-        'chromium-browser',
         'google-chrome',
         'google-chrome-stable',
         'chrome',
+        'chromium',
+        'chromium-browser',
         'brave-browser',
         'microsoft-edge',
     ];
@@ -58,16 +59,47 @@ final class PdfRenderer
         file_put_contents($tmpHtml, $html);
 
         try {
+            if (is_file($destination)) {
+                @unlink($destination);
+            }
+
             $command = self::ENGINE_CHROMIUM === $this->engine
                 ? $this->chromiumCommand($tmpHtml, $destination)
                 : [$this->binary, '--quiet', '--enable-local-file-access', $tmpHtml, $destination];
 
             $process = new Process($command, null, null, null, $this->timeout);
-            $process->run();
 
-            if (!$process->isSuccessful() || !is_file($destination)) {
-                throw new \RuntimeException(\sprintf("PDF generation failed (%s):\n%s", $this->engine, trim($process->getErrorOutput().$process->getOutput())));
+            try {
+                $process->start();
+
+                $deadline = microtime(true) + $this->timeout;
+                while ($process->isRunning() && microtime(true) < $deadline) {
+                    if (is_file($destination) && filesize($destination) > 0) {
+                        // Some Chrome builds write the PDF and then hang; stop once the file is ready.
+                        usleep(250_000);
+                        if ($process->isRunning()) {
+                            $process->stop(1);
+                        }
+                        break;
+                    }
+
+                    usleep(100_000);
+                }
+
+                if ($process->isRunning()) {
+                    $process->stop(1);
+                }
+            } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exception) {
+                if (!is_file($destination) || filesize($destination) <= 0) {
+                    throw $exception;
+                }
             }
+
+            if (is_file($destination) && filesize($destination) > 0) {
+                return;
+            }
+
+            throw new \RuntimeException(\sprintf("PDF generation failed (%s) using %s:\n%s", $this->engine, $this->binary, trim($process->getErrorOutput().$process->getOutput())));
         } finally {
             @unlink($tmpHtml);
         }
@@ -103,11 +135,17 @@ final class PdfRenderer
      */
     private function chromiumCommand(string $sourceHtml, string $destination): array
     {
+        $source = realpath($sourceHtml);
+        if (false === $source) {
+            throw new \RuntimeException('Unable to resolve temporary HTML path for PDF generation.');
+        }
+
         return [
             (string) $this->binary,
             '--headless=new',
             '--disable-gpu',
             '--no-sandbox',
+            '--disable-dev-shm-usage',
             '--no-first-run',
             '--no-default-browser-check',
             '--hide-scrollbars',
@@ -115,7 +153,7 @@ final class PdfRenderer
             '--virtual-time-budget=5000',
             '--no-pdf-header-footer',
             '--print-to-pdf='.$destination,
-            'file://'.realpath($sourceHtml),
+            'file://'.$source,
         ];
     }
 

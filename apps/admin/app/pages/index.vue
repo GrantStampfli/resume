@@ -57,7 +57,7 @@ async function importFiles(overwrite: boolean): Promise<void> {
       <UPageGrid class="lg:grid-cols-3">
         <UPageCard
           title="Resume"
-          description="Edit apps/resume-gen/resume.md, the source for gstampfli.com."
+          description="Edit apps/resume-gen/resume.yml, the source for gstampfli.com."
           icon="i-lucide-file-text"
           to="/resume"
           variant="subtle"

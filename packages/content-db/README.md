@@ -36,8 +36,8 @@ file::memory:             # tests
 
 Tables are created by `migrate()`, which every method calls and which runs once per instance.
 
-Keys are **repository-relative paths**, so the resume markdown and the portfolio content share one table:
-`apps/resume-gen/resume.md`, `apps/portfolio/content/articles/hello.md`. `paths.ts` has the constants and
+Keys are **repository-relative paths**, so the resume YAML and the portfolio content share one table:
+`apps/resume-gen/resume.yml`, `apps/portfolio/content/articles/hello.md`. `paths.ts` has the constants and
 helpers, plus `normalizeContentPath`, which decodes and rejects traversal, control characters and
 extensions other than `.md`, `.yml`, `.yaml` and `.json`.
 

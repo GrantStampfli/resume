@@ -40,9 +40,9 @@ final class HtmlCommandTest extends ResumeTestCase
         // SmartyPants turns straight quotes and dashes into typographic entities.
         self::assertStringContainsString('&#8220;ships&#8221;', $html);
         self::assertStringContainsString('&#8212;', $html);
-        // The LESS in the template css directory is compiled and inlined.
+        // Template CSS is compiled (LESS nesting flattened) and inlined.
         self::assertStringContainsString('<style type="text/css">', $html);
-        self::assertStringContainsString('.clearfix:after', $html);
+        self::assertStringContainsString('--resume-accent', $html);
         self::assertStringNotContainsString('&:after', $html);
         self::assertStringNotContainsString('{{', $html);
     }

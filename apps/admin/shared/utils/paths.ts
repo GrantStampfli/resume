@@ -1,5 +1,5 @@
 /** Paths of the files the admin manages, relative to the monorepo root. */
-export const RESUME_PATH = 'apps/resume-gen/resume.md'
+export const RESUME_PATH = 'apps/resume-gen/resume.yml'
 export const PORTFOLIO_CONTENT_DIR = 'apps/portfolio/content'
 
 export const EDITABLE_EXTENSIONS = ['.md', '.yml', '.yaml', '.json'] as const

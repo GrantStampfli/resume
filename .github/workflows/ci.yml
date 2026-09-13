@@ -49,17 +49,27 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
+          cache: pnpm
 
       - name: Composer install
         run: composer install --no-interaction --no-progress --prefer-dist --working-dir=app
+
+      - name: Install workspace packages
+        working-directory: .
+        run: pnpm install --frozen-lockfile --filter @stampfli/resume-gen...
 
       - name: Lint (php-cs-fixer)
         run: composer lint --working-dir=app
 
       - name: Test (PHPUnit)
+        env:
+          # Prefer the runner's Google Chrome; distro Chromium often hangs on --print-to-pdf.
+          RESUME_CHROMIUM_PATH: /usr/bin/google-chrome
         run: composer test --working-dir=app
 
       - name: Build HTML + PDF
