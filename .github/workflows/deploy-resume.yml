@@ -52,9 +52,15 @@ jobs:
         working-directory: .
         run: pnpm install --frozen-lockfile --filter @stampfli/resume-gen...
 
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+        with:
+          chrome-version: stable
+          install-dependencies: true
+
       - name: Build HTML + PDF
         env:
-          RESUME_CHROMIUM_PATH: /usr/bin/google-chrome
+          RESUME_CHROMIUM_PATH: ${{ steps.chrome.outputs.chrome-path }}
           CONTENT_DATABASE_URL: ${{ secrets.CONTENT_DATABASE_URL }}
         run: node scripts/build.mjs
 

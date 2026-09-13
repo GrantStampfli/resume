@@ -28,7 +28,7 @@ final class PdfRenderer
     private ?string $engine = null;
     private ?string $binary = null;
 
-    public function __construct(?string $engine = null, private readonly float $timeout = 30.0)
+    public function __construct(?string $engine = null, private readonly float $timeout = 60.0)
     {
         $engine ??= getenv('RESUME_PDF_ENGINE') ?: null;
 
@@ -141,16 +141,19 @@ final class PdfRenderer
     {
         return [
             (string) $this->binary,
-            // Prefer classic headless: `--headless=new` often hangs after --print-to-pdf.
-            '--headless',
+            '--headless=new',
             '--disable-gpu',
             '--no-sandbox',
             '--disable-dev-shm-usage',
+            '--disable-background-networking',
+            '--disable-extensions',
+            '--disable-sync',
             '--no-first-run',
             '--no-default-browser-check',
             '--hide-scrollbars',
+            '--mute-audio',
             '--run-all-compositor-stages-before-draw',
-            '--virtual-time-budget=5000',
+            '--virtual-time-budget=10000',
             '--user-data-dir='.$userDataDir,
             '--no-pdf-header-footer',
             '--print-to-pdf='.$destination,
