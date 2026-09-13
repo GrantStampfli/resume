@@ -296,7 +296,6 @@ dl em {
   h3#skills + ul,
   h3#technical + ol,
   h3#experience + dl {
-    display: block;
     overflow: hidden;
     margin-top: 0;
   }
