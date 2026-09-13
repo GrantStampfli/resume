@@ -53,8 +53,14 @@ jobs:
         with:
           node-version-file: .nvmrc
 
+      - uses: pnpm/action-setup@v4
+
       - name: Composer install
         run: composer install --no-interaction --no-progress --prefer-dist --working-dir=app
+
+      - name: Install workspace packages
+        working-directory: .
+        run: pnpm install --frozen-lockfile --filter @stampfli/resume-gen...
 
       - name: Lint (php-cs-fixer)
         run: composer lint --working-dir=app
