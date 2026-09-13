@@ -71,7 +71,25 @@ final class PdfRenderer
             $process = new Process($command, null, null, null, $this->timeout);
 
             try {
-                $process->run();
+                $process->start();
+
+                $deadline = microtime(true) + $this->timeout;
+                while ($process->isRunning() && microtime(true) < $deadline) {
+                    if (is_file($destination) && filesize($destination) > 0) {
+                        // Give Chromium a moment to finish writing, then stop the hung process.
+                        usleep(200_000);
+                        if ($process->isRunning()) {
+                            $process->stop(0);
+                        }
+                        break;
+                    }
+
+                    usleep(100_000);
+                }
+
+                if ($process->isRunning()) {
+                    $process->stop(0);
+                }
             } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exception) {
                 // Headless Chrome can write the PDF and then hang; fall through to the file check.
                 if (!is_file($destination) || filesize($destination) <= 0) {
@@ -123,7 +141,8 @@ final class PdfRenderer
     {
         return [
             (string) $this->binary,
-            '--headless=new',
+            // Prefer classic headless: `--headless=new` often hangs after --print-to-pdf.
+            '--headless',
             '--disable-gpu',
             '--no-sandbox',
             '--disable-dev-shm-usage',
