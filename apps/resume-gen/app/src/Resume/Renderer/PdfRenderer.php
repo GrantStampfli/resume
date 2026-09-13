@@ -15,12 +15,13 @@ final class PdfRenderer
     public const ENGINE_CHROMIUM = 'chromium';
     public const ENGINE_WKHTMLTOPDF = 'wkhtmltopdf';
 
+    // Prefer Google Chrome over distro Chromium — the latter often hangs on --print-to-pdf in CI.
     private const CHROMIUM_CANDIDATES = [
-        'chromium',
-        'chromium-browser',
         'google-chrome',
         'google-chrome-stable',
         'chrome',
+        'chromium',
+        'chromium-browser',
         'brave-browser',
         'microsoft-edge',
     ];
@@ -28,7 +29,7 @@ final class PdfRenderer
     private ?string $engine = null;
     private ?string $binary = null;
 
-    public function __construct(?string $engine = null, private readonly float $timeout = 60.0)
+    public function __construct(?string $engine = null, private readonly float $timeout = 120.0)
     {
         $engine ??= getenv('RESUME_PDF_ENGINE') ?: null;
 
@@ -55,9 +56,7 @@ final class PdfRenderer
 
         $workDir = \dirname($destination);
         $tmpHtml = $workDir.\DIRECTORY_SEPARATOR.'.tmp_pdf_source_'.bin2hex(random_bytes(4)).'.html';
-        $tmpProfile = $workDir.\DIRECTORY_SEPARATOR.'.tmp_chrome_profile_'.bin2hex(random_bytes(4));
         file_put_contents($tmpHtml, $html);
-        mkdir($tmpProfile, 0o700, true);
 
         try {
             if (is_file($destination)) {
@@ -65,7 +64,7 @@ final class PdfRenderer
             }
 
             $command = self::ENGINE_CHROMIUM === $this->engine
-                ? $this->chromiumCommand($tmpHtml, $destination, $tmpProfile)
+                ? $this->chromiumCommand($tmpHtml, $destination)
                 : [$this->binary, '--quiet', '--enable-local-file-access', $tmpHtml, $destination];
 
             $process = new Process($command, null, null, null, $this->timeout);
@@ -76,10 +75,10 @@ final class PdfRenderer
                 $deadline = microtime(true) + $this->timeout;
                 while ($process->isRunning() && microtime(true) < $deadline) {
                     if (is_file($destination) && filesize($destination) > 0) {
-                        // Give Chromium a moment to finish writing, then stop the hung process.
-                        usleep(200_000);
+                        // Some Chrome builds write the PDF and then hang; stop once the file is ready.
+                        usleep(250_000);
                         if ($process->isRunning()) {
-                            $process->stop(0);
+                            $process->stop(1);
                         }
                         break;
                     }
@@ -88,24 +87,21 @@ final class PdfRenderer
                 }
 
                 if ($process->isRunning()) {
-                    $process->stop(0);
+                    $process->stop(1);
                 }
             } catch (\Symfony\Component\Process\Exception\ProcessTimedOutException $exception) {
-                // Headless Chrome can write the PDF and then hang; fall through to the file check.
                 if (!is_file($destination) || filesize($destination) <= 0) {
                     throw $exception;
                 }
             }
 
-            // Headless Chrome sometimes writes the PDF and then hangs; accept the file if present.
             if (is_file($destination) && filesize($destination) > 0) {
                 return;
             }
 
-            throw new \RuntimeException(\sprintf("PDF generation failed (%s):\n%s", $this->engine, trim($process->getErrorOutput().$process->getOutput())));
+            throw new \RuntimeException(\sprintf("PDF generation failed (%s) using %s:\n%s", $this->engine, $this->binary, trim($process->getErrorOutput().$process->getOutput())));
         } finally {
             @unlink($tmpHtml);
-            $this->removeDirectory($tmpProfile);
         }
     }
 
@@ -137,51 +133,28 @@ final class PdfRenderer
     /**
      * @return list<string>
      */
-    private function chromiumCommand(string $sourceHtml, string $destination, string $userDataDir): array
+    private function chromiumCommand(string $sourceHtml, string $destination): array
     {
+        $source = realpath($sourceHtml);
+        if (false === $source) {
+            throw new \RuntimeException('Unable to resolve temporary HTML path for PDF generation.');
+        }
+
         return [
             (string) $this->binary,
             '--headless=new',
             '--disable-gpu',
             '--no-sandbox',
             '--disable-dev-shm-usage',
-            '--disable-background-networking',
-            '--disable-extensions',
-            '--disable-sync',
             '--no-first-run',
             '--no-default-browser-check',
             '--hide-scrollbars',
-            '--mute-audio',
             '--run-all-compositor-stages-before-draw',
-            '--virtual-time-budget=10000',
-            '--user-data-dir='.$userDataDir,
+            '--virtual-time-budget=5000',
             '--no-pdf-header-footer',
             '--print-to-pdf='.$destination,
-            'file://'.realpath($sourceHtml),
+            'file://'.$source,
         ];
-    }
-
-    private function removeDirectory(string $directory): void
-    {
-        if (!is_dir($directory)) {
-            return;
-        }
-
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($directory, \FilesystemIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST,
-        );
-
-        foreach ($iterator as $file) {
-            $path = $file->getPathname();
-            if ($file->isDir()) {
-                @rmdir($path);
-            } else {
-                @unlink($path);
-            }
-        }
-
-        @rmdir($directory);
     }
 
     private function detect(?string $preferred): void
