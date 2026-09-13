@@ -1,0 +1,107 @@
+name: Grant Stampfli
+title: Software Engineer
+pdf: resume.pdf
+contact:
+  phone: (503) 446-5997
+  phoneHref: tel:+15034465997
+  email: mail@gstampfli.com
+  linkedin: grantstampfli
+  github: grantstampfli
+  links: []
+profile: >-
+  Conscientious, innovative and driven professional with a mission to not be an individual
+  contributor, but a key individual who succeeds in maximizing the contributions and success of
+  the entire team. Strong attention to detail. Ability to multitask and bring multiple, complex
+  projects to completion simultaneously. Focused on building user-friendly, standards-based, and
+  visually engaging websites from concept to testing. Passionate about developing web apps that
+  impact and empower users. Always excited about cutting edge technology developments, and
+  constantly striving to expand my capabilities.
+skills:
+  - name: Web Development
+    description: >-
+      Experienced with creating robust progressive web applications. Front end web development with
+      semantic HTML5, CSS3, JavaScript with a focus on cross-browser accessibility.
+  - name: System Admin
+    description: >-
+      Skillful with Linux based servers (Debian and Ubuntu). Knowledgeable in the configuration and
+      tweaking of Apache, Nginx, MySQL, and PostgreSQL.
+  - name: UI Design
+    description: >-
+      Wire framing, high fidelity photo editing in Photoshop and site planning. Translating design
+      comps and wireframes into mobile first single page web applications.
+technical:
+  - HTML5
+  - CSS3
+  - Javascript
+  - VueJS
+  - EmberJS
+  - JQuery
+  - Node
+  - Ruby
+  - Python
+experience:
+  - organisation: Expeditors
+    role: Senior Full Stack Engineer
+    dates: May 2020-Present
+    summary: >-
+      The Koho project: Koho is a digital 3PL, offering LTL instant rates, booking and shipment
+      management. Ruby on Rails and Vue.js full stack development. A few responsibilities include
+      working closely with designer/PM/stakeholders to make a rich user experience and a user
+      interface that is industry leading and stands in the market. Built a vue component library and
+      a modern single page application. Test driven development approach to streamline the
+      deployment process and limit UI bugs reaching production.
+  - organisation: Fleet Logistics
+    role: Senior Front End Engineer
+    dates: January 2018-May 2020
+    summary: >-
+      Digital Freight Forwarding Startup: Fleet is a digital freight forwarder that offers
+      end-to-end international freight shipping services, from instant rates and booking to freight
+      management and delivery. Rails and Vue.js application development in a code review-driven
+      agile workflow. A few responsibilities include working closely with designer/PM/stakeholders
+      to create UX and UI rich functionalities, building components and views with TDD (Jest), and
+      limited devops.
+  - organisation: Platt Electric Supply
+    role: Front End Developer & Team Lead
+    dates: October 2015-January 2018
+    summary: >-
+      Platt.com is a full featured E-commerce website with additional tools for the electrical
+      industry. Front end development of several ASP.NET MVC websites for both internal and
+      external use. Promoted to a team lead. Mentored developers in javascript and other front end
+      development methodologies. Involved in projects ranging from complete .net merchandise
+      systems, to help desk/chat tools.
+  - organisation: Prosper IT Consulting
+    role: Web Developer
+    dates: August 2015-September 2015
+    summary: >-
+      Front end development of an ASP.NET MVC learning portal for proprietary technical software
+      development course. App was fully hosted in the Azure cloud, and used ASP.NET Identity, OAuth,
+      and SQL Server.
+  - organisation: Now Nerd
+    role: Front End Developer
+    dates: March 2015-August 2015
+    summary: >-
+      Front end web/app development utilizing the latest web technologies in a SaaS, SPA, or
+      cloud-based product environment to improve user work flows and simplify user interactions for
+      web-based apps. Building applications with extensive admin functionality and backend
+      integration via an api. Implementing data visualization frameworks for metrics and reporting
+      for the user dashboard of an application.
+  - organisation: Web-Developer
+    role: Independent Web Developer
+    dates: July 2013-Present
+    summary: >-
+      Full-stack JavaScript development utilizing semantic HTML5, CSS3, Bootstrap, VueJS, EmberJS,
+      and NodeJS; adhering to the latest web UI standards, design patterns, and best practices.
+      Adept at transforming PSD (Photoshop) design comps and wireframes into HTML5 and CSS3
+      layouts. Utilizing agile development and test driven development to guarantee productivity
+      and simplify workflow. Implementation of advanced JavaScript functionality with front end
+      frameworks to assemble highly-scalable, modular, and well-documented code; deploying
+      responsive mobile first web-apps; and pixel perfect user-friendly website interfaces.
+      Projects include: Cloud Agent, a full stack web app built using MVC and SqlServer data
+      stores. Implemented the front end using Javascript, EmberJS, HTML and SASS. The application
+      monitors computers on a domain to make it easy to administrate vital hardware and software
+      statistics running on a machine. The application also hooked into Microsoft's roaming
+      profiles and domain management allowing the ability to push software updates and group
+      install software with a click of a button. Cote de Or Order Tracker: An internal company tool
+      to track customer orders and shipments for a wine distributer that imports fine wines from
+      France. The app was a full stack application built using .Net Core (a MVC framework). I
+      Implemented the front end using VueJS, JavaScript, Bootstrap, HTML, and CSS.

@@ -1,185 +1,307 @@
-.clearfix {
-  zoom: 1;
-	&:after {
-        display: block;
-        visibility: hidden;
-        height: 0;
-        clear: both;
-        content: ".";
-    }
+:root {
+  --resume-ink: #18212b;
+  --resume-muted: #5a6a78;
+  --resume-accent: #0f6e76;
+  --resume-accent-soft: #e7f3f4;
+  --resume-line: #d5dee6;
+  --resume-paper: #eef3f6;
+  --resume-surface: #ffffff;
+  --resume-shadow: 0 18px 50px rgba(24, 33, 43, 0.08);
+  --resume-radius: 18px;
+  --resume-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --resume-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --resume-measure: 52rem;
+  --resume-rail: 8.25rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Hoefler Text', Times New Roman, Times, serif;
-    color: #444;
-}
-h1, h2, h3, h4, ul dl dt {
-    font-family: Futura, "Century Gothic", AppleGothic, sans-serif;
+  margin: 0;
+  color: var(--resume-ink);
+  font-family: var(--resume-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(15, 110, 118, 0.16), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(24, 33, 43, 0.08), transparent 50%),
+    linear-gradient(180deg, #f7fafc 0%, var(--resume-paper) 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
-    margin: 0 auto;
-    padding: 0;
-    background: whiteSmoke;
-    border: solid #666;
-    border-width: 8px 0 2px 0;
-    text-align: left;
+  width: ~"min(100% - 2rem, var(--resume-measure))";
+  margin: 0 auto;
+  padding: 1.25rem 0 3rem;
 }
 
 .resume {
-    position:relative;
-    padding: 10px 20px;
+  position: relative;
+  background: var(--resume-surface);
+  border: 1px solid #e4ebf0;
+  border-radius: var(--resume-radius);
+  box-shadow: var(--resume-shadow);
+  padding: ~"clamp(1.25rem, 3vw, 2.5rem)";
+  overflow: hidden;
+}
+
+.resume::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--resume-accent), #1f8f98 55%, #274b5b);
 }
 
 a {
-    color: #990003;
+  color: var(--resume-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
 }
 
-a[href$='.pdf'] {
-    display: inline-block;
-    background: #666;
-    color: white;
-    padding: 6px 12px;
-    margin-bottom: 6px;
-    text-decoration: none;
+a:hover {
+  color: #0b555c;
 }
 
-blockquote {
-    margin: 0;
-    padding: 0;
-    line-height: 1.4em;
-}
-
-hr {
-    display: block;
-    position: relative;
-    padding: 0;
-    margin: 18px auto;
-    width: 100%;
-    clear: both;
-    border: none;
-    border-top: 1px solid #CCC;
-    font-size: 1px;
-    line-height: 0;
-    overflow: visible;
-    page-break-after: avoid;
+h1,
+h2,
+h3,
+ul dl dt,
+dl dt {
+  font-family: var(--resume-serif);
+  font-weight: 550;
+  letter-spacing: -0.02em;
+  color: var(--resume-ink);
 }
 
 h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 36px;
-    letter-spacing: -1px;
-    font-weight: normal;
+  margin: 0;
+  padding-right: 12rem;
+  font-size: ~"clamp(2rem, 5vw, 2.85rem)";
+  line-height: 1.05;
 }
+
 h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 18px;
-    font-style: italic;
-    letter-spacing: -1px;
-    font-weight: normal;
+  margin: 0.35rem 0 0;
+  padding-right: 12rem;
+  font-family: var(--resume-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--resume-muted);
 }
 
 h3 {
-    margin: 0px 20px;
-    padding: 0 0 .5em;
-    font-size: 150%;
-    font-style: italic;
-    font-weight: normal;
+  margin: 0;
+  font-size: 1.15rem;
+  font-style: normal;
 }
 
-h3+p {
-    margin: .6em 0 16px;
-    padding: 0;
-    display: block;
-    font-size: 104%;
-    line-height: 24px;
+blockquote {
+  margin: 1rem 0 0;
+  padding: 0;
+  border: 0;
+  line-height: 1.45;
 }
 
+blockquote p {
+  margin: 0;
+}
+
+a[href$='.pdf'] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.55rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--resume-ink);
+  color: white;
+  font-family: var(--resume-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+a[href$='.pdf']:hover {
+  background: var(--resume-accent);
+  color: white;
+  transform: translateY(-1px);
+}
+
+hr {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: 1.4rem 0;
+  border: 0;
+  clear: both;
+  background: linear-gradient(90deg, transparent, var(--resume-line), transparent);
+  page-break-after: avoid;
+}
+
+h3 + p {
+  margin: 0.55rem 0 0;
+  color: #3a4652;
+}
 
 ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: table;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1rem;
 }
+
 ul li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul dl {
-    margin: .3em 0 0;
-    padding: 0;
-    width: 100%;
-    dt {
-        font-size: 100%;
-    }
-    dd {
-        margin: 0 0 1em;
-        padding: 0 2em 0 0;
-        font-size: .8em;
-        line-height: 1.5em;
-    }
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--resume-line);
+  border-radius: 12px;
+  background: var(--resume-accent-soft);
+}
+
+ul dl dt {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+ul dl dd {
+  margin: 0;
+  padding: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--resume-muted);
 }
 
 ol {
-    margin: 0;
-    padding: 0 0 .75em;
-    width: 84%;
-    display: inline-block;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: ~"repeat(auto-fit, minmax(8.5rem, 1fr))";
+  gap: 0.55rem;
 }
 
 ol li {
-    margin: 0 0 0 1em;
-    padding: 0;
-    border-top: 1px solid #CCCCCC;
-    width: 100%;
-    float: left;
-    list-style: none;
-    line-height: 24px;
-    font-size: 14px;
-}
-ol li:nth-child(1) {
-    border-top: none;
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--resume-line);
+  border-radius: 10px;
+  background: #fbfcfd;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 dl {
-    display: inline-block;
-    width: 78%;
-    margin: 0;
-    padding: 0;
-    dt {
-        margin: 0;
-        padding: 0;
-        font-size: 140%;
-    }
-    dd {
-        margin: 0 0 1.5em;
-        padding: 0;
-        font-size: 80%;
-        line-height: 1.4em;
-    }
-    strong {
-        display: block;
-    }
-    em {
-        display: block;
-        font-size: 110%;
-        margin: .15em 0 .5em;
-        font-style: bold;
-    }
-    
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.15rem;
 }
 
+dl dt {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+dl dd {
+  margin: 0.2rem 0 0;
+  padding: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #2c3640;
+}
+
+dl strong {
+  display: inline-block;
+  margin: 0.15rem 0 0.35rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--resume-accent-soft);
+  color: var(--resume-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+dl em {
+  display: block;
+  margin: 0.15rem 0 0.35rem;
+  font-family: var(--resume-sans);
+  font-size: 0.98rem;
+  font-style: normal;
+  font-weight: 650;
+  color: var(--resume-ink);
+}
 
 #footer {
-    display: none;
+  display: none;
 }
 
 #footer + p {
-    width: 100%;
-    font-size: 11px;
-    text-align: center;
+  margin: 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--resume-muted);
+}
+
+@media (max-width: 39.99em) {
+  h1,
+  h2 {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 40em) {
+  .container {
+    padding-top: 2.5rem;
+  }
+
+  blockquote {
+    position: absolute;
+    top: ~"clamp(1.25rem, 3vw, 2.5rem)";
+    right: ~"clamp(1.25rem, 3vw, 2.5rem)";
+    text-align: right;
+    max-width: 12.5rem;
+  }
+
+  h3#profile,
+  h3#skills,
+  h3#technical,
+  h3#experience {
+    float: left;
+    clear: left;
+    width: var(--resume-rail);
+    margin-top: 0.2rem;
+  }
+
+  h3#profile + p,
+  h3#skills + ul,
+  h3#technical + ol,
+  h3#experience + dl {
+    display: block;
+    overflow: hidden;
+    margin-top: 0;
+  }
+
+  ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

@@ -1,1 +1,1 @@
-Modern and clean layout (default)
+Modern layout with structured sections, grid, and print-ready typography (default)

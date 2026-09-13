@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   const { raw } = await readValidatedBody(event, schema.parse)
   const { store, driver } = useContentStore(event)
 
-  await store.write(RESUME_PATH, raw.endsWith('\n') ? raw : `${raw}\n`, 'chore(resume): update resume.md via admin', user.name)
+  await store.write(RESUME_PATH, raw.endsWith('\n') ? raw : `${raw}\n`, 'chore(resume): update resume.yml via admin', user.name)
   triggerDeploy('resume')
 
   if (driver === 'db')

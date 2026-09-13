@@ -2,15 +2,16 @@
 
 pnpm + Turborepo monorepo for my resume generator, portfolio site and the admin that manages both.
 
-| App                                  | Stack                                       | Deploys to                   |
-| ------------------------------------ | ------------------------------------------- | ---------------------------- |
-| [`apps/resume-gen`](apps/resume-gen) | PHP 8 CLI (Symfony Console, Twig, Chromium) | GitHub Pages → gstampfli.com |
-| [`apps/portfolio`](apps/portfolio)   | Nuxt 4, Nuxt UI, Nuxt Content               | Vercel                       |
-| [`apps/admin`](apps/admin)           | Nuxt 4, Nuxt UI, nuxt-auth-utils            | Vercel                       |
+| App                                  | Stack                                             | Deploys to                   |
+| ------------------------------------ | ------------------------------------------------- | ---------------------------- |
+| [`apps/resume-gen`](apps/resume-gen) | YAML → Markdown Extra → HTML/PDF (PHP + Chromium) | GitHub Pages → gstampfli.com |
+| [`apps/portfolio`](apps/portfolio)   | Nuxt 4, Nuxt UI, Nuxt Content                     | Vercel                       |
+| [`apps/admin`](apps/admin)           | Nuxt 4, Nuxt UI, nuxt-auth-utils                  | Vercel                       |
 
 | Package                                      | What it is                                                          |
 | -------------------------------------------- | ------------------------------------------------------------------- |
 | [`packages/content-db`](packages/content-db) | Database-backed content store shared by the admin and the portfolio |
+| [`packages/resume-md`](packages/resume-md)   | Structured resume YAML schema + Markdown Extra serialization        |
 
 ## Getting started
 
@@ -39,7 +40,7 @@ Dependency versions are pinned once in the `catalog:` section of `pnpm-workspace
 
 ## Content storage
 
-Content lives in the repository as markdown and YAML (`apps/resume-gen/resume.md`,
+Content lives in the repository as markdown and YAML (`apps/resume-gen/resume.yml`,
 `apps/portfolio/content/**`) and the admin edits those files through the `fs` or `github` driver.
 
 Set `CONTENT_DATABASE_URL` (or `DATABASE_URL` / `POSTGRES_URL`) and content moves to a database instead:
@@ -55,7 +56,7 @@ repository secret for that workflow.
 
 - `.github/workflows/ci.yml` — lint, typecheck, test and build on every push/PR.
 - `.github/workflows/deploy-resume.yml` — builds `apps/resume-gen` and publishes `dist/` to GitHub Pages
-  whenever `resume.md` or the generator changes on `master`.
+  whenever `resume.yml` or the generator changes on `master`.
 - The Nuxt apps are Vercel projects with their root directory set to `apps/portfolio` and `apps/admin`;
   each has a `vercel.json` that builds through `turbo` and skips unaffected deploys with `turbo-ignore`.
 

@@ -3,21 +3,21 @@
   "type": "module",
   "version": "3.0.0",
   "private": true,
-  "description": "Markdown resume generator (PHP CLI) that builds the static resume site",
+  "description": "YAML resume compiler + PHP CLI that builds the static resume site",
   "scripts": {
     "install:php": "composer install --working-dir=app --no-interaction",
     "build": "node scripts/build.mjs",
-    "build:html": "php app/bin/resume html --template modern --output index resume.md dist",
-    "build:pdf": "php app/bin/resume pdf --template modern resume.md dist",
+    "build:html": "node scripts/build.mjs",
     "dev": "node scripts/build.mjs --watch",
     "preview": "node scripts/preview.mjs",
-    "stats": "php app/bin/resume stats resume.md",
+    "stats": "node scripts/stats.mjs",
     "templates": "php app/bin/resume templates",
     "test": "composer test --working-dir=app",
     "lint:php": "composer lint --working-dir=app",
     "lint:php:fix": "composer lint:fix --working-dir=app"
   },
   "dependencies": {
-    "@stampfli/content-db": "workspace:*"
+    "@stampfli/content-db": "workspace:*",
+    "@stampfli/resume-md": "workspace:*"
   }
 }

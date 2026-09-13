@@ -1,6 +1,8 @@
 dist/
+.data/
 app/vendor/
 app/.phpunit.cache/
 app/.phpstan.cache/
 app/.php-cs-fixer.cache
 .tmp_pdf_source*.html
+resume.md

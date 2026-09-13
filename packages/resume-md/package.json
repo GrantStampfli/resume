@@ -1,9 +1,9 @@
 {
-  "name": "@stampfli/content-db",
+  "name": "@stampfli/resume-md",
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Database-backed store for the portfolio content and the resume YAML, shared by the admin and the portfolio",
+  "description": "Structured YAML resume data and PHP Markdown Extra serialization for the resume generator",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -23,12 +23,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "db0": "catalog:",
-    "pg": "catalog:"
+    "yaml": "catalog:",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@types/pg": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"

@@ -1,110 +1,100 @@
 body.pdf {
+  color: black;
+  background: white;
+  font-size: 14px;
+
+  a {
     color: black;
+    text-decoration: none;
+  }
 
-    a {
-        text-decoration: none;
-        color: black;
-    }
-    .container {
-        width: 1000px;
-        margin: 0 auto;
-        padding: 0;
-        background: none;
-        border: none;
-        border-width: 8px 0 2px 0;
-        text-align: left;
-    }
+  .container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    .resume {
-        position:relative;
-        padding: 40px 80px;
-    }
+  .resume {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 36px 48px;
+    overflow: visible;
+  }
 
-    a[href$='.pdf'] {
-        display: none;
-    }
+  .resume::before {
+    display: none;
+  }
 
-    h1 {
-        letter-spacing: 0;
-        margin-top: 0;
-        font-size: 48px;
-        text-transform: uppercase;
-        font-weight: normal;
-    }
-    h2 {
-        letter-spacing: 0;
-        text-transform: uppercase;
-        font-style: italic;
-        font-weight: normal;
-    }
-    h3 {
-        float: left;
-        width: 16%;
-        font-style: normal;
-    }
-    h3+p {
-        float: left;
-        width: 78%;
-    }
+  a[href$='.pdf'] {
+    display: none;
+  }
 
-    blockquote {
-        top: 40px;
-        right: 50px;
-        position: absolute;
-    }
+  h1 {
+    font-size: 34px;
+    padding-right: 180px;
+  }
 
-    ul li {
-        width: 33%;
-        float: left;
-    }
-    ul dl {
-        margin: 0;
-        padding: 0.3em 0 0;
-        dt {
-            font-size: 122%;
-            font-weight: normal;
-            margin: 0 0 .75em;
-        }
-        dd {
-            padding: 0 2em 0 0;
-        }
-    }
+  h2 {
+    padding-right: 180px;
+  }
 
-    ol {
-        float: left;
-        width: 79%;
-        margin: .7em 0 0;
-    }
+  blockquote {
+    position: absolute;
+    top: 36px;
+    right: 48px;
+    text-align: right;
+    max-width: 160px;
+  }
 
-    ol li {
-        width: 33%;
-        margin: 0;
-    }
-    ol li:nth-child(3n) {
-        width: 34%;
-    }
-    ol li:nth-child(1), ol li:nth-child(2), ol li:nth-child(3) {
-        border-top: none;
-    }
+  hr {
+    margin: 14px 0;
+  }
 
-    dl {
-        margin: .7em 0 0;
-        page-break-inside: avoid !important;
-        display: block;
-        width:79%;
-        float: left;
-        dt {}
-        dd {
-        }
-        strong {
-            float: right;
-            margin-top: -2em;
-        }
-        em {
-            font-size: 130%;
-            font-style: normal;
-        }
+  h3#profile,
+  h3#skills,
+  h3#technical,
+  h3#experience {
+    float: left;
+    clear: left;
+    width: 110px;
+    margin-top: 2px;
+  }
 
-    }
+  h3#profile + p,
+  h3#skills + ul,
+  h3#technical + ol,
+  h3#experience + dl {
+    display: block;
+    overflow: hidden;
+    margin-top: 0;
+  }
 
+  ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  ul dl {
+    background: #f4f7f8;
+    page-break-inside: avoid;
+  }
+
+  ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  dl {
+    gap: 12px;
+  }
+
+  dl dt,
+  dl dd {
+    page-break-inside: avoid;
+  }
+
+  #footer + p {
+    font-size: 10px;
+  }
 }

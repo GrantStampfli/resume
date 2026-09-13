@@ -16,6 +16,6 @@ final class TemplatesCommandTest extends ResumeTestCase
             self::assertStringContainsString($template, $display);
         }
 
-        self::assertStringContainsString('Modern and clean layout (default)', $display);
+        self::assertStringContainsString('Modern layout with structured sections', $display);
     }
 }

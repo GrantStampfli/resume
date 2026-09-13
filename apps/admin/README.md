@@ -3,8 +3,9 @@
 Admin CMS for the monorepo content, built with Nuxt 4 + Nuxt UI (dashboard components) and deployed on
 Vercel. It edits two things:
 
-- **Resume** — `apps/resume-gen/resume.md`, with a preview that understands the PHP Markdown Extra syntax
-  (definition lists, `{#id}` headers). Locally it can also run the generator to produce the HTML/PDF.
+- **Resume** — `apps/resume-gen/resume.yml`, edited as a structured form (or raw YAML). The generator
+  compiles it to PHP Markdown Extra for HTML/PDF. Locally it can also run the generator to produce the
+  output.
 - **Portfolio content** — every markdown/yaml/json file under `apps/portfolio/content`, plus a "new project"
   scaffold and image uploads to Vercel Blob.
 
@@ -35,7 +36,7 @@ CONTENT_DATABASE_URL=postgres://user:password@host:5432/database
 CONTENT_DATABASE_URL=file:.data/content.db   # local
 ```
 
-Rows are keyed by repository-relative path (`apps/resume-gen/resume.md`,
+Rows are keyed by repository-relative path (`apps/resume-gen/resume.yml`,
 `apps/portfolio/content/articles/hello.md`), so the same table backs the resume and the portfolio.
 
 - **Import files** on the dashboard copies the checked-in files into the database. It skips paths that
