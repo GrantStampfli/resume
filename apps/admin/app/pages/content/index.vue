@@ -90,7 +90,7 @@ function describe(error: unknown): string {
 }
 
 function formatDate(value: string | null): string {
-  return value ? new Date(value).toLocaleString() : '—'
+  return value ? new Date(value).toLocaleString() : '–'
 }
 </script>
 
@@ -119,7 +119,7 @@ function formatDate(value: string | null): string {
             </NuxtLink>
           </template>
           <template #title-cell="{ row }">
-            {{ row.original.title ?? '—' }}
+            {{ row.original.title ?? '–' }}
           </template>
           <template #updatedAt-cell="{ row }">
             <span class="text-muted text-sm">{{ formatDate(row.original.updatedAt) }}</span>
