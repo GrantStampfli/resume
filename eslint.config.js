@@ -1,5 +1,6 @@
 // @ts-check
 import antfu from '@antfu/eslint-config'
+import { createSlopConfig } from 'eslint-plugin-slop'
 
 export default antfu(
   {
@@ -29,4 +30,6 @@ export default antfu(
       'apps/portfolio/content/**',
     ],
   },
+).append(
+  ...createSlopConfig({ cwd: import.meta.dirname }),
 )

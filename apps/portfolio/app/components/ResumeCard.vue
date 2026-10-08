@@ -52,7 +52,7 @@ const roles = computed(() => (props.experience?.items ?? [])
           </dt>
           <dd class="ml-auto text-xs text-zinc-400 dark:text-zinc-500" :aria-label="`${role.start.label} until ${role.end.label}`">
             <time :datetime="role.start.dateTime">{{ role.start.label }}</time>
-            <span aria-hidden="true"> — </span>
+            <span aria-hidden="true">: </span>
             <time :datetime="role.end.dateTime">{{ role.end.label }}</time>
           </dd>
         </dl>

@@ -37,6 +37,7 @@
     "@types/node": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-format": "catalog:",
+    "eslint-plugin-slop": "catalog:",
     "lint-staged": "catalog:",
     "simple-git-hooks": "catalog:",
     "taze": "catalog:",
