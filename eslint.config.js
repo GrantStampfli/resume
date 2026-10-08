@@ -31,5 +31,5 @@ export default antfu(
     ],
   },
 ).append(
-  ...createSlopConfig({ cwd: import.meta.dirname, inspection: 'full' }),
+  ...createSlopConfig({ cwd: import.meta.dirname }),
 )
