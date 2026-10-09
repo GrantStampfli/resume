@@ -14,7 +14,8 @@ Every PR that changes what a user sees ships a before/after pair per affected st
 3. Check out the merge base in a detached temporary worktree so the working branch is untouched:
 
    ```bash
-   base=$(git merge-base origin/main HEAD)
+   default=$(git symbolic-ref --short refs/remotes/origin/HEAD)  # e.g. origin/main or origin/master
+   base=$(git merge-base "$default" HEAD)
    git worktree add --detach /tmp/pr-base "$base"
    ```
 
@@ -55,7 +56,7 @@ After creating the PR, open it and confirm every image renders and matches its l
 
 ## Fallback
 
-On an older `gh`, upload each file to `https://uploads.github.com/user-attachments/assets` with the `gh auth token` bearer token and paste the returned `https://github.com/user-attachments/assets/...` URL into the body. The airi `upload-github-attachment` script wraps this flow. If neither route works, stop and report the local paths instead of committing images.
+On a `gh` older than 2.99, or with no `gh` at all, stop and report the local paths instead of committing images. Do not script an upload with `gh auth token` or any other bearer token: the token ends up in shell history, tool transcripts, and error output.
 
 <!--
 Source references:

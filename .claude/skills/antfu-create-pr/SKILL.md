@@ -19,6 +19,7 @@ Open a PR that a reviewer can understand from the body alone. Explain the change
 5. Run the checks that match the changed surfaces (focused tests, typecheck, lint). Record the exact commands and results.
 6. If the diff changes user-visible UI, capture before/after evidence. See [visual-evidence](references/visual-evidence.md).
 7. Write the body to a temporary file. Push the branch. Create the PR with `gh pr create --title ... --body-file ...` (add `--attach` for each screenshot). Use `--draft` when checks are still running or the work is not review-ready.
+   If `gh` is not installed or not authenticated (Claude Code cloud sessions have no `gh`), create the PR with the GitHub API tools the session already has, and only when the user asked for a PR. Screenshots cannot be attached that way: write the body file, list the local screenshot paths, and stop. Never read or print a token to upload them.
 8. Open the created PR and verify title, base, head, rendered tables, diagrams, and images.
 9. Address review comments: fix each confirmed issue, run focused checks, push, reply with evidence, and resolve the thread.
 

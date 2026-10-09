@@ -9,6 +9,8 @@ metadata:
 
 > The skill is based on Nitro v3 (beta, 3.0.260903), generated at 2026-09-25.
 
+> **Repo note:** check which Nitro this project installs before using these examples. A Nuxt 4 app runs `nitropack` v2, not v3: keep the v2 APIs it already uses (`defineEventHandler` and `createError({ statusCode })` from `h3`, `useStorage`) and do not migrate existing handlers to v3 to match this skill. Read [advanced-migration](references/advanced-migration.md) only when the project is deliberately moving to v3.
+
 Nitro is a framework-agnostic, deployment-agnostic server toolkit powered by [H3](https://h3.dev) v2, [unstorage](https://unstorage.unjs.io), and Vite/Rolldown/Rollup. It powers Nuxt and works standalone. From one codebase it builds optimized output for Node.js, Bun, Deno, Cloudflare, Vercel, Netlify, and more.
 
 Key capabilities:
